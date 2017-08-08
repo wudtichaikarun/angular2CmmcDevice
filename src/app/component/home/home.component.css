@@ -1,0 +1,29 @@
+.pagination{
+  text-align: center;
+}
+.card{
+  padding: 4px;
+}
+.connect{
+    border: 4px solid greenyellow;
+}
+
+.disconnect{
+     border: 4px solid orange;
+  }
+
+.card_content{
+  background-color: whitesmoke;
+}
+.card-content{
+    padding: 10px 24px 0px 24px;
+}
+.text-darken-4{
+  border-radius: 5px;
+  text-align: center;
+}
+
+.detailBtn{
+  text-align: right;
+  padding: 0 24px 10px 24px;
+}
