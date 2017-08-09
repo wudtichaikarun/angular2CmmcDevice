@@ -1,5 +1,5 @@
 
-<!-- <ul class="pagination">
+ <ul class="pagination">
     <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
     <li class="active"><a href="#!">1</a></li>
     <li class="waves-effect"><a href="#!">2</a></li>
@@ -7,59 +7,56 @@
     <li class="waves-effect"><a href="#!">4</a></li>
     <li class="waves-effect"><a href="#!">5</a></li>
     <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
-  </ul> -->
+  </ul>
 
 
-<div class="row">
+<div class="row rowMain">
   <div class="col m4 l3" *ngFor="let device of deveces">
-    <div class="card {{status}} ">
+    <div class="card {{device.status}} ">
         <div class="card-content">
+          <div class="row">
+            <div class="col s9 deviceName">
+              <p>{{device.deviceName}}</p>
+            </div>
+            <div class="col s3 detaliIcon">
+              <button
+                (click)="showDetail()"
+                md-icon-button
+                *ngIf="device.status=='connect'"
+                class="btn tooltipped showDetailBtnConnect"
+                data-position="bottom"
+                data-delay="50"
+                data-tooltip="Show More Detail">
+                <md-icon>more</md-icon></button>
+              <button
+                md-icon-button
+                *ngIf="device.status=='disconnect'"
+                class="btn tooltipped showDetailBtnDisConnect"
+                data-position="bottom" data-delay="50"
+                data-tooltip="Connection Fail">
+                 <md-icon>error</md-icon></button>
+
+            </div>
+          </div>
           <!-- <span class="card-title activator grey-text text-darken-4">More Detail<i class="material-icons right">more_vert</i></span> -->
           <div class="row">
             <div class="col s4">
-              <p><b>ip:</b></p>
-              <p><b>heap:</b></p>
-              <p><b>run time:</b></p>
-              <p><b>prefix:</b></p>
+              <p class="detailFont"><b>ip:</b></p>
+              <p class="detailFont"><b>heap:</b></p>
+              <p class="detailFont"><b>run time:</b></p>
+              <p class="detailFont"><b>prefix:</b></p>
             </div>
             <div class="col s8">
-              <p>192.168.1.200</p>
-              <p>40.096 kB</p>
-              <p>10.73828 H</p>
-              <p>CMMC/232386/status</p>
+              <p class="detailFont">192.168.1.200</p>
+              <p class="detailFont">40.096 kB</p>
+              <p class="detailFont">10.73828 H</p>
+              <p class="detailFont">CMMC/232386/status</p>
             </div>
           </div>
 
-          <button md-button>More Detail</button>
-
+           <!-- <button md-icon-button><md-icon>more_vert</md-icon></button> -->
+          <!-- <button md-button class="detailBtn">More Detail</button> -->
         </div>
-
-        <!-- <div class="card-reveal">
-          <span class="card-title grey-text text-darken-4">Device name<i class="material-icons right">close</i></span>
-          <div class="row">
-              <div class="col s12">
-                <p><b>Status:</b>77</p>
-                <p><b>Mac:</b>fafdasfasfasfafaf</p>
-                <p><b>Ip:</b>192.168.1.1</p>
-                <p><b>Sdk:</b>77</p> </div>
-              <div class="col s6">
-                <p><b>Millis:</b>77</p>
-                <p><b>Value:</b>77</p>
-                <p><b>Device id:</b>77</p>
-                <p><b>Heap:</b>77</p>
-                <p><b>Rssi:</b>77</p>
-                <p><b>Counter:</b>77</p>
-                <p><b>Subscription:</b>77</p> </div>
-              <div class="col s6">
-                <p><b>Ssid:</b>77</p>
-                <p><b>Flash size:</b>77</p>
-                <p><b>Flash id:</b>77</p>
-                <p><b>Chip id:</b>77</p>
-                <p><b>Client id:</b>77</p>
-                <p><b>Prefix:</b>77</p>
-                <p><b>Version:</b>77</p> </div>
-          </div>
-        </div> -->
 
   </div>
  </div>

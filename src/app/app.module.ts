@@ -4,13 +4,19 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { Routes, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
-import {MdButtonModule,MdSidenavModule} from '@angular/material';
+import {
+  MdButtonModule,
+  MdSidenavModule,
+  MdIconModule,
+  MdDialogModule
+} from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './component/nav/nav.component';
 import { HomeComponent } from './component/home/home.component';
 import { FooterComponent } from './component/footer/footer.component';
 import { ConfigDataComponent } from './component/config-data/config-data.component';
+import { ShowMoreDetailComponent } from './component/home/show-more-detail/show-more-detail.component';
 
 const routes: Routes = [
     // {
@@ -29,7 +35,8 @@ const routes: Routes = [
     NavComponent,
     HomeComponent,
     FooterComponent,
-    ConfigDataComponent
+    ConfigDataComponent,
+    ShowMoreDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +44,12 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     FormsModule,
     MdButtonModule,
-    MdSidenavModule
+    MdSidenavModule,
+    MdIconModule,
+    MdDialogModule
+  ],
+   entryComponents: [
+    ShowMoreDetailComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

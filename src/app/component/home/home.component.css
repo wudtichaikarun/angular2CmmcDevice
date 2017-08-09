@@ -1,22 +1,26 @@
+.rowMain{
+  margin: 20px;
+}
+.row{
+  margin: 5px;
+}
 .pagination{
   text-align: center;
 }
 .card{
-  padding: 4px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .connect{
-    border: 4px solid greenyellow;
+    border: 25px solid palegreen;
 }
 
 .disconnect{
-     border: 4px solid orange;
+     border: 25px solid orange;
   }
 
-.card_content{
-  background-color: whitesmoke;
-}
 .card-content{
-    padding: 10px 24px 0px 24px;
+    background-color: white;
+    padding: 5px;
 }
 .text-darken-4{
   border-radius: 5px;
@@ -27,3 +31,31 @@
   text-align: right;
   padding: 0 24px 10px 24px;
 }
+
+/* .detailBtn{
+  background-color: white;
+  border: 1px solid black;
+} */
+.detaliIcon{
+  text-align: right;
+}
+.deviceName{
+  text-align: center;
+  font-size: 1.5rem;
+  color: gray;
+}
+.showDetailBtnConnect{
+  background-color: white;
+  color: green;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.showDetailBtnDisConnect{
+  background-color: white;
+  color: orange;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+p.detailFont{
+  margin-bottom: 9px;
+  color: gray;
+}
+
