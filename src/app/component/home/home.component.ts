@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
         "version": 0.96
     },
     "d": {
-        "myName": "Romantic-001",
+        "myName": "RB-001",
         "millis": 36081,
         "temperature_c": 0,
         "humidity_percent_rh": 0,
@@ -36,7 +36,7 @@ export class HomeComponent implements OnInit {
         "counter": 4,
         "subscription": 1
     }
-},    {
+},{
     "info": {
         "ssid": "Romantic wifi",
         "flash_size": 4194304,
@@ -51,7 +51,7 @@ export class HomeComponent implements OnInit {
         "version": 0.96
     },
     "d": {
-        "myName": "Romantic-001",
+        "myName": "RB-001",
         "millis": 36081,
         "temperature_c": 0,
         "humidity_percent_rh": 0,
@@ -86,6 +86,56 @@ export class HomeComponent implements OnInit {
         "counter": 4,
         "subscription": 1
     }
+},{
+    "info": {
+        "ssid": "Romantic wifi",
+        "flash_size": 4194304,
+        "flash_id": "1640c8",
+        "chip_id": "f32c3a",
+        "sdk": "1.5.3(aec24ac9)",
+        "mac": "18:FE:34:F3:2C:3A",
+        "client_id": "15936570",
+        "device_id": "15936570",
+        "prefix": "MARU",
+        "ip": "192.168.1.23",
+        "version": 0.96
+    },
+    "d": {
+        "myName": "RB-002",
+        "millis": 36081,
+        "temperature_c": 0,
+        "humidity_percent_rh": 0,
+        "state": 0,
+        "heap": 41536,
+        "rssi": -58,
+        "counter": 4,
+        "subscription": 1
+    }
+},{
+    "info": {
+        "ssid": "Romantic wifi",
+        "flash_size": 4194304,
+        "flash_id": "1640c8",
+        "chip_id": "f32c3a",
+        "sdk": "1.5.3(aec24ac9)",
+        "mac": "18:FE:34:F3:2C:3A",
+        "client_id": "15936570",
+        "device_id": "15936570",
+        "prefix": "MARU",
+        "ip": "192.168.1.23",
+        "version": 0.96
+    },
+    "d": {
+        "myName": "RB-003",
+        "millis": 36081,
+        "temperature_c": 0,
+        "humidity_percent_rh": 0,
+        "state": 0,
+        "heap": 41536,
+        "rssi": -58,
+        "counter": 4,
+        "subscription": 1
+    }
 }
   ]
   constructor(public dialog: MdDialog) { }
@@ -93,8 +143,8 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
-  showDetail(){
-    console.log("hello");
-    this.dialog.open(ShowMoreDetailComponent);
+  showDetail(device){
+    let dialogRet = this.dialog.open(ShowMoreDetailComponent);
+    dialogRet.componentInstance.device = device;
   }
 }

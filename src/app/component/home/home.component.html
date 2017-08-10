@@ -21,8 +21,9 @@
               <p> {{ device.d.myName }} </p>
             </div>
             <div class="col s3 detaliIcon">
+              <!-- <app-show-more-detail [device]="device" ></app-show-more-detail> -->
               <button
-                (click)="showDetail()"
+                (click)="showDetail(device)"
                 md-icon-button
                 *ngIf="(device.info.client_id)"
                 class="btn tooltipped showDetailBtnConnect"
@@ -31,6 +32,7 @@
                 data-tooltip="Show More Detail">
                 <md-icon>more</md-icon></button>
               <button
+                (click)="showDetail(device)"
                 md-icon-button
                 *ngIf="(!device.info.client_id)"
                 class="btn tooltipped showDetailBtnDisConnect"

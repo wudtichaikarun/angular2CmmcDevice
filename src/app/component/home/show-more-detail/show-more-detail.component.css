@@ -21,14 +21,21 @@ button{
   margin: 10px 0;
   padding: 0 2px 0 2px;
   color: grey;
-  background-color: hsla(0, 100%, 70%, 0.3);
+  /* background-color: hsla(0, 100%, 70%, 0.3); */
 }
 .BgNoColorDetial{
   margin: 10px 0;
+  color: grey;
 }
 .col.s5{
   padding-right: 0px;
 }
 .col.s7{
   padding-left: 0px;
+}
+.dialogTitle{
+  text-align: center;
+  margin: 0;
+  color: gray;
+  font-size: 1.5rem;
 }
