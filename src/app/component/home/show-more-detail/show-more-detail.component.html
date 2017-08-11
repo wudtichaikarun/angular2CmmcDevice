@@ -13,29 +13,64 @@
 </div>
 
 <md-dialog-content>
-  <div class="row">
+  <!-- <div class="row">
     <div class="col s6">
       <p  class="dialogTitle">info</p>
-        <!-- <div class="row"> -->
           <div class="col s5">
             <p class="BgColorDetial" *ngFor="let infoKey of infoKeys()" ><b>{{infoKey}}:</b></p>
           </div>
           <div class="col s7">
             <p class="BgColorDetial" *ngFor="let infoKey of infoKeys()">{{ device.info[infoKey] }}</p>
           </div>
-        <!-- </div> -->
     </div>
     <div class="col s6">
       <p  class="dialogTitle">d</p>
-        <!-- <div class="row"> -->
           <div class="col s7">
             <p class="BgColorDetial" *ngFor="let dKey of dKeys()"><b>{{dKey}}:</b></p>
           </div>
           <div class="col s4">
             <p class="BgColorDetial" *ngFor="let dKey of dKeys()">{{ device.d[dKey] }}</p>
           </div>
-        <!-- </div> -->
     </div>
-  </div>
+  </div> -->
+<div class="row">
+
+    <div class="col l6">
+      <table class="highlight">
+        <thead>
+          <tr>
+              <th>info_key</th>
+              <th>info_value</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let infoKey of infoKeys()" >
+            <td ><b>{{infoKey}}:</b></td>
+            <td>{{ device.info[infoKey] }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col l6">
+      <table class="highlight">
+        <thead>
+          <tr>
+              <th>d_key</th>
+              <th>d_value</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let dKey of dKeys()" >
+            <td><b>{{ dKey }}:</b></td>
+            <td>{{ device.d[dKey] }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+</div>
 </md-dialog-content>
 
