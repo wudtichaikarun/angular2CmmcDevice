@@ -6,22 +6,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./show-more-detail.component.css']
 })
 export class ShowMoreDetailComponent implements OnInit {
-  device: Dictionary;
-  constructor() { }
+  device : Dictionary
 
-   infoKeys():Array<string> {
-      return Object.keys(this.device.info);
-    }
+  constructor () {}
 
-    dKeys():Array<string> {
-      return Object.keys(this.device.d)
-    }
+  infoKeys () : Array<string> {
+    return Object.keys(this.device.info)
+  }
 
+  dKeys () : Array<string> {
+    return Object.keys(this.device.d)
+  }
 
-  ngOnInit() {
+  ngOnInit () {
   }
 
 }
-interface Dictionary{
-  [index: string ]: string
+
+interface Dictionary {
+  [index : string ] : string
 }

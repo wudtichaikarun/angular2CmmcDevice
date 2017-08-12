@@ -4,7 +4,8 @@
 .row{
   margin: 5px;
 }
-.pagination{
+.homeHeader{
+  margin-top: 20px;
   text-align: center;
 }
 .card{
@@ -59,3 +60,12 @@ p.detailFont{
   color: gray;
 }
 
+.mat-input-element{
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+.mat-input-infix{
+  margin-top: 2px;
+  border: 0;
+}
