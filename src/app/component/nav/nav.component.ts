@@ -8,7 +8,7 @@ import { FormControl } from '@angular/forms'
 })
 
 export class NavComponent implements OnInit {
-  @Output()  clickOpenNav: EventEmitter<any> = new EventEmitter()
+  @Output ()  clickOpenNav: EventEmitter<any> = new EventEmitter()
 
   constructor () {}
 
@@ -18,4 +18,9 @@ export class NavComponent implements OnInit {
   btnSettingsClick () {
     this.clickOpenNav.emit()
   }
+
+  refresh () {
+    window.location.reload()
+  }
+
 }
