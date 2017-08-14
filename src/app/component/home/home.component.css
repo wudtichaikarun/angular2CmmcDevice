@@ -2,70 +2,28 @@
   margin: 20px;
 }
 .row{
-  margin: 5px;
+  margin: 0 5px 5px 5px;
 }
 .homeHeader{
-  margin-top: 20px;
   text-align: center;
-}
-.card{
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-.connect{
-    border: 25px solid palegreen;
+  height: 50px;
 }
 
-.disconnect{
-     border: 25px solid orange;
-  }
-
-.card-content{
-    background-color: white;
-    padding: 5px;
-}
-.text-darken-4{
-  border-radius: 5px;
-  text-align: center;
+/* filter selection */
+.mat-primary{
+  border-radius: 2px;
+  margin: 0 10px 0 30px;
 }
 
-.detailBtn{
-  text-align: right;
-  padding: 0 24px 10px 24px;
-}
-
-/* .detailBtn{
-  background-color: white;
-  border: 1px solid black;
-} */
-.detaliIcon{
-  text-align: right;
-}
-.deviceName{
-  text-align: center;
-  font-size: 1.5rem;
-  color: gray;
-}
-.showDetailBtnConnect{
-  background-color: white;
-  color: green;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-.showDetailBtnDisConnect{
-  background-color: white;
-  color: orange;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-p.detailFont{
-  margin-bottom: 9px;
-  color: gray;
-}
-
-.mat-input-element{
-  margin: 0;
+/* search input box */
+#md-input-1{
+  margin: auto;
   border: 0;
-  padding: 0;
+  height: 20px;
 }
-.mat-input-infix{
-  margin-top: 2px;
+div.mat-input-infix{
   border: 0;
+}
+div.mat-input-wrapper{
+  margin-right: 20px;
 }

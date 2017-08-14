@@ -1,14 +1,11 @@
-
 <div class="homeHeader">
-  <!-- selector for filter deviecs by status -->
-  <md-select placeholder="Filter Devices" (change)="onMySelectChange(t.value)" #t>
-    <md-option *ngFor="let status of devicesStatus" [value]="status.value">
-      {{ status.viewValue }}
-    </md-option>
-  </md-select>
 
+  <!-- search and autocomplete -->
   <md-input-container>
-      <input mdInput placeholder="SEARCH BY DEVICE NAME" [mdAutocomplete]="auto" [formControl]="stateCtrl">
+      <input type="tel" mdInput placeholder="sharch by device name" [mdAutocomplete]="auto" [formControl]="stateCtrl">
+      <md-icon mdSuffix>
+        search
+      </md-icon>
   </md-input-container>
 
   <md-autocomplete #auto="mdAutocomplete" [displayWith]="displayFn"  >
@@ -17,71 +14,23 @@
     </md-option>
   </md-autocomplete>
 
+  <!-- filter deviecs -->
+  <md-select placeholder="filter device" (change)="onMySelectChange(t.value)" #t>
+    <md-option *ngFor="let status of devicesStatus" [value]="status.value">
+      {{ status.viewValue }}
+    </md-option>
+  </md-select>
+
 </div>
 
-<p>{{selectValue}} </p>
 
 <div class="row rowMain">
-  <div class="col m6 l3" *ngFor="let device of devices | filterStatus: selectValue"  >
-    <div [ngClass]="(device.info.client_id) ? 'card connect' : 'card disconnect'">
 
-      <div class="card-content">
-        <div class="row">
-          <div class="col s9 deviceName">
-            <p> {{ device.d.myName }} </p>
-          </div>
+  <!-- Card Component -->
+  <app-card
+    class="col m6 l3"
+    *ngFor="let device of devices | filterStatus: selectValue"
+    [content]="device" >
+  </app-card>
 
-          <div class="col s3 detaliIcon">
-            <!-- btn show detail when status = ON LINE -->
-            <button
-              (click)="showDetail(device)"
-              md-icon-button
-              *ngIf="(device.info.client_id)"
-              class="btn tooltipped showDetailBtnConnect"
-              data-position="bottom"
-              data-delay="50"
-              data-tooltip="Show More Detail">
-              <md-icon>more</md-icon>
-            </button>
-            <!-- btn show detail when status = OFF LINE -->
-            <button
-              (click)="showDetail(device)"
-              md-icon-button
-              *ngIf="(!device.info.client_id)"
-              class="btn tooltipped showDetailBtnDisConnect"
-              data-position="bottom" data-delay="50"
-              data-tooltip="Connection Fail">
-              <md-icon>error</md-icon>
-            </button>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col s4">
-            <!-- ip key -->
-            <p class="detailFont"><b>ip:</b></p>
-            <!-- heap key -->
-            <p class="detailFont"><b>heap:</b></p>
-            <!-- run time key -->
-            <p class="detailFont"><b>run time:</b></p>
-            <!-- prefix key -->
-            <p class="detailFont"><b>prefix:</b></p>
-          </div>
-
-          <div class="col s8">
-            <!-- ip value -->
-            <p class="detailFont">{{ device.info.ip }}</p>
-            <!-- heap value -->
-            <p class="detailFont">{{ device.d.heap/1000 }} kB</p>
-            <!-- run time value -->
-            <p class="detailFont">{{ ((device.d.millis/1000*24)/(86400)).toFixed(5) }} hours</p>
-            <!-- prefix value -->
-            <p class="detailFont">{{ device.info.prefix }}/{{ device.info.device_id || device.d.device_id }}/status</p>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-  </div>
 </div>

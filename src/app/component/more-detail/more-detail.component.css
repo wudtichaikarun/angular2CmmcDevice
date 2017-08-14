@@ -1,0 +1,35 @@
+/* dialog font  */
+.dialogHeader{
+  margin: 0px;
+}
+.dialogTitleName{
+  text-align: center;
+  color: gray;
+}
+td{
+  padding: 9px;
+}
+h2{
+  margin: 0;
+}
+
+/* btn close */
+button{
+  background-color: #ff6666;
+  color: white;
+  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
+}
+.dialogBtnClose{
+  padding: 0px;
+  text-align: right;
+}
+
+/* dialog content */
+.col.s5{
+  padding-right: 0px;
+}
+.col.s7{
+  padding-left: 0px;
+}
+
+

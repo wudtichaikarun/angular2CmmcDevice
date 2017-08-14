@@ -1,0 +1,62 @@
+<div [ngClass]="(content.info.client_id) ? 'card connect' : 'card disconnect'">
+  <div class="card-content">
+
+    <div class="row">
+
+      <div class="col s9 deviceName">
+        <p> {{ content.d.myName }} </p>
+      </div>
+
+      <div class="col s3 detaliIcon">
+        <!-- btn show detail when status = ON LINE -->
+        <button
+          (click)="showDetail(content)"
+          md-icon-button
+          *ngIf="(content.info.client_id)"
+          class="btn tooltipped showDetailBtnConnect"
+          data-position="bottom"
+          data-delay="50"
+          data-tooltip="Show More Detail">
+          <md-icon>more</md-icon>
+        </button>
+
+        <!-- btn show detail when status = OFF LINE -->
+        <button
+          (click)="showDetail(content)"
+          md-icon-button
+          *ngIf="(!content.info.client_id)"
+          class="btn tooltipped showDetailBtnDisConnect"
+          data-position="bottom" data-delay="50"
+          data-tooltip="Connection Fail">
+          <md-icon>error</md-icon>
+        </button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col s4">
+        <!-- ip key -->
+        <p class="detailFont"><b>ip:</b></p>
+        <!-- heap key -->
+        <p class="detailFont"><b>heap:</b></p>
+        <!-- run time key -->
+        <p class="detailFont"><b>run time:</b></p>
+        <!-- prefix key -->
+        <p class="detailFont"><b>prefix:</b></p>
+      </div>
+
+      <div class="col s8">
+        <!-- ip value -->
+        <p class="detailFont">{{ content.info.ip }}</p>
+        <!-- heap value -->
+        <p class="detailFont">{{ content.d.heap/1000 }} kB</p>
+        <!-- run time value -->
+        <p class="detailFont">{{ ((content.d.millis/1000*24)/(86400)).toFixed(5) }} hours</p>
+        <!-- prefix value -->
+        <p class="detailFont">{{ content.info.prefix }}/{{ content.info.device_id || content.d.device_id }}/status</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+

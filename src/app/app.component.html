@@ -1,3 +1,15 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<app-nav></app-nav>
+<md-sidenav-container>
+  <md-sidenav #sidenav >
+    <app-config-data (CancleClick)="sidenav.close()"></app-config-data>
+  </md-sidenav>
 
+  <!-- Nav Component -->
+  <app-nav (clickOpenNav)="sidenav.open()"></app-nav>
+
+  <!-- Home Component -->
+  <app-home></app-home>
+
+  <!-- Footer Component -->
+  <!-- <app-footer></app-footer> -->
+
+</md-sidenav-container>

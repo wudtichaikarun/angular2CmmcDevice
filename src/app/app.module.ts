@@ -10,15 +10,18 @@ import {
   MdDialogModule,
   MdSelectModule,
   MdAutocompleteModule,
-  MdInputModule
+  MdInputModule,
+  MdCardModule
 } from '@angular/material';
 import { AppComponent } from './app.component';
 import { NavComponent } from './component/nav/nav.component';
 import { HomeComponent } from './component/home/home.component';
 import { FooterComponent } from './component/footer/footer.component';
 import { ConfigDataComponent } from './component/config-data/config-data.component';
-import { ShowMoreDetailComponent } from './component/home/show-more-detail/show-more-detail.component';
-import { DevicesFilter } from './component/home/devices-filter';
+import { CardComponent } from './component/card/card.component';
+import { MoreDetailComponent } from './component/more-detail/more-detail.component';
+// pipe filter
+import { DevicesFilter } from './shared/devices-filter';
 
 const routes: Routes = [
 // {
@@ -38,8 +41,9 @@ const routes: Routes = [
     HomeComponent,
     FooterComponent,
     ConfigDataComponent,
-    ShowMoreDetailComponent,
-    DevicesFilter
+    DevicesFilter,
+    CardComponent,
+    MoreDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -54,9 +58,10 @@ const routes: Routes = [
     MdSelectModule,
     MdAutocompleteModule,
     MdInputModule,
+    MdCardModule
   ],
   entryComponents: [
-    ShowMoreDetailComponent
+    MoreDetailComponent
   ],
   providers: [],
   bootstrap: [

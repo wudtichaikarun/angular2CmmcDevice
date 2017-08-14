@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core'
-import { MdDialog } from '@angular/material'
-import { ShowMoreDetailComponent } from './show-more-detail/show-more-detail.component'
 import { MockData } from '../../shared/mock-data'
 import { FormControl } from '@angular/forms'
 import 'rxjs/add/operator/startWith'
@@ -24,7 +22,7 @@ export class HomeComponent implements OnInit {
   stateCtrl: FormControl;
   filteredStates: any;
 
-  constructor (public dialog: MdDialog) {
+  constructor () {
     this.stateCtrl = new FormControl();
     this.filteredStates = this.stateCtrl.valueChanges
         .startWith(null)
@@ -51,19 +49,12 @@ export class HomeComponent implements OnInit {
     this.states = deviceName
   }
 
-  showDetail (device) {
-    let dialogRet = this.dialog.open(ShowMoreDetailComponent)
-    dialogRet.componentInstance.device = device
-  }
-
   onMySelectChange (value) {
     this.selectValue = value
     console.log(value)
   }
 
   displayFn (state): string {
-    this.selectValue = state
-    //console.log(state)
     return state
   }
 

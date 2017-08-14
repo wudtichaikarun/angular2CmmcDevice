@@ -1,8 +1,10 @@
 <div class="row dialogHeader">
+
   <div class="col s11 dialogTitleName">
       <h2 md-dialog-title>{{ device.d.myName }}</h2>
   </div>
 
+  <!-- btn close -->
   <div class="col s1">
     <md-dialog-actions class="dialogBtnClose">
       <button
@@ -15,27 +17,9 @@
 
 </div>
 
+
 <md-dialog-content>
-  <!-- <div class="row">
-    <div class="col s6">
-      <p  class="dialogTitle">info</p>
-        <div class="col s5">
-          <p class="BgColorDetial" *ngFor="let infoKey of infoKeys()" ><b>{{infoKey}}:</b></p>
-        </div>
-        <div class="col s7">
-          <p class="BgColorDetial" *ngFor="let infoKey of infoKeys()">{{ device.info[infoKey] }}</p>
-        </div>
-    </div>
-    <div class="col s6">
-      <p  class="dialogTitle">d</p>
-        <div class="col s7">
-          <p class="BgColorDetial" *ngFor="let dKey of dKeys()"><b>{{dKey}}:</b></p>
-        </div>
-        <div class="col s4">
-          <p class="BgColorDetial" *ngFor="let dKey of dKeys()">{{ device.d[dKey] }}</p>
-        </div>
-    </div>
-  </div> -->
+
   <div class="row">
     <div class="col l6">
       <table class="highlight">
@@ -76,4 +60,3 @@
   </div>
 
 </md-dialog-content>
-

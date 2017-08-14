@@ -13,3 +13,17 @@ a.btn.tooltipped{
   background-color: rgba(0, 0, 0, 0);
   box-shadow:0;
 }
+.mat-primary{
+  background-color: white;
+  border-radius: 2px;
+  margin: 0 10px 0 10px;
+}
+
+.nav-wrapper{
+  background-color: black;
+}
+
+.searchBox{
+  width: 10%;
+
+}

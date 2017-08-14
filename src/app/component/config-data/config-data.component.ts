@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./config-data.component.css']
 })
 export class ConfigDataComponent implements OnInit {
+  @Output() CancleClick: EventEmitter<any> = new EventEmitter()
 
   clientCHK: boolean = false;
   userPassword: boolean = false;
@@ -14,7 +15,9 @@ export class ConfigDataComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
-    console.log(this.clientCHK)
   }
 
+  btnCancleClick(){
+    this.CancleClick.emit()
+  }
 }

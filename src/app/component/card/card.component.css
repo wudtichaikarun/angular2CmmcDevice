@@ -1,0 +1,55 @@
+.row{
+  margin: 0 5px 5px 5px;
+}
+.homeHeader{
+  text-align: center;
+  height: 50px;
+}
+.card{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.connect{
+    border: 25px solid palegreen;
+}
+
+.disconnect{
+     border: 25px solid orange;
+  }
+
+.card-content{
+    background-color: white;
+    padding: 5px;
+}
+.text-darken-4{
+  border-radius: 5px;
+  text-align: center;
+}
+
+.detailBtn{
+  text-align: right;
+  padding: 0 24px 10px 24px;
+}
+
+.detaliIcon{
+  text-align: right;
+}
+.deviceName{
+  text-align: center;
+  font-size: 1.5rem;
+  color: gray;
+}
+.showDetailBtnConnect{
+  background-color: white;
+  color: green;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.showDetailBtnDisConnect{
+  background-color: white;
+  color: orange;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+p.detailFont{
+  margin-bottom: 9px;
+  color: gray;
+}
+
