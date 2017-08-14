@@ -15,8 +15,8 @@
   </md-autocomplete>
 
   <!-- filter deviecs -->
-  <md-select placeholder="filter device" (change)="onMySelectChange(t.value)" #t>
-    <md-option *ngFor="let status of devicesStatus" [value]="status.value">
+  <md-select placeholder="filter device" >
+    <md-option *ngFor="let status of devicesStatus" [value]="status.value" (click)="onMySelectChange(status.value)" >
       {{ status.viewValue }}
     </md-option>
   </md-select>
