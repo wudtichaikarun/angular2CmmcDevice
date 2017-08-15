@@ -16,7 +16,6 @@ export class CardComponent implements OnInit {
   }
 
   showDetail (content) {
-    console.log(content)
     let dialogRet = this.dialog.open(MoreDetailComponent)
     dialogRet.componentInstance.device = content
   }

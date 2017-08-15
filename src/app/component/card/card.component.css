@@ -8,6 +8,8 @@
 .card{
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
+/* card status color */
 .connect{
     border: 25px solid palegreen;
 }
@@ -25,18 +27,13 @@
   text-align: center;
 }
 
+/* btn more detail */
 .detailBtn{
   text-align: right;
   padding: 0 24px 10px 24px;
 }
-
 .detaliIcon{
   text-align: right;
-}
-.deviceName{
-  text-align: center;
-  font-size: 1.5rem;
-  color: gray;
 }
 .showDetailBtnConnect{
   background-color: white;
@@ -47,6 +44,13 @@
   background-color: white;
   color: orange;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+/* font style */
+.deviceName{
+  text-align: center;
+  font-size: 1.5rem;
+  color: gray;
 }
 p.detailFont{
   margin-bottom: 9px;

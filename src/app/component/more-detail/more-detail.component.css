@@ -6,16 +6,17 @@
   text-align: center;
   color: gray;
 }
-td{
+td, th{
   padding: 9px;
+  color: gray;
 }
 h2{
   margin: 0;
 }
 
 /* btn close */
-button{
-  background-color: #ff6666;
+.mat-icon-button{
+  background-color: red;
   color: white;
   /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
 }
