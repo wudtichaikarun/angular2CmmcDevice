@@ -33,11 +33,19 @@
 .detaliIcon{
   text-align: right;
 }
-.deviceName{
-  text-align: center;
-  font-size: 1.5rem;
+
+.deviceName {
   color: gray;
 }
+
+.deviceFont {
+  text-align: center;
+  font-size: 1.5rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
 .showDetailBtnConnect{
   background-color: white;
   color: green;
@@ -51,5 +59,8 @@
 p.detailFont{
   margin-bottom: 9px;
   color: gray;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
