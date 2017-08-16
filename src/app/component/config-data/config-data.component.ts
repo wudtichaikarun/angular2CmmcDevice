@@ -12,6 +12,13 @@ export class ConfigDataComponent implements OnInit {
   clientCHK: boolean = false;
   userPassword: boolean = false;
 
+  port: number;
+  prefix: string;
+  username: string;
+  password: string;
+  clientId: string;
+
+
   constructor(private router: Router) { }
 
   ngOnInit() {
@@ -19,5 +26,15 @@ export class ConfigDataComponent implements OnInit {
 
   btnCancleClick(){
     this.CancleClick.emit();
+  }
+
+  onSubmit () {
+    console.log(`
+                port = ${ this.port }
+                prefix = ${ this.prefix }
+                username= ${ this.username }
+                password = ${ this.password }
+                clientId = ${ this.clientId }
+                `)
   }
 }

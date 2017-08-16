@@ -1,61 +1,63 @@
 <div class="row">
-    <form class="col s12">
-      <h5>configualtion</h5>
-      <div class="row">
-        <div class="input-field col s12">
-          <input id="host" type="text" class="validate">
-          <label for="host">Host*</label>
-        </div>
-
-        <div class="input-field col s12">
-          <input id="port" type="text" class="validate">
-          <label for="port">Port *</label>
-        </div>
-
-         <div class="input-field col s12">
-          <input id="prefix" type="text" class="validate">
-          <label for="prefix">Prefix</label>
-        </div>
+  <!-- <form class="col s12"> -->
+  <div class="col s12" >
+    <h5>configualtion</h5>
+    <div class="row">
+      <div class="input-field col s12">
+        <input id="host" type="text" class="validate">
+        <label for="host">Host*</label>
       </div>
 
-      <!-- User naem and Password input -->
-      <div class="row" *ngIf="userPassword">
-        <div class="input-field col s12">
-          <input id="name" type="text" class="validate">
-          <label for="name">User name</label>
-        </div>
-
-        <div class="input-field col s12">
-          <input id="password" type="text" class="validate">
-          <label for="password">Password</label>
-        </div>
+      <div class="input-field col s12">
+        <input id="port" type="number" class="validate" [(ngModel)]="port" >
+        <label for="port">Port *</label>
       </div>
 
-      <!-- client id input -->
-       <div class="row" *ngIf="clientCHK">
         <div class="input-field col s12">
-          <input id="clientId" type="text" class="validate">
-          <label for="clientId">Client id</label>
-        </div>
+        <input id="prefix" type="text" class="validate" [(ngModel)]="prefix" >
+        <label for="prefix">Prefix</label>
+      </div>
+    </div>
+
+    <!-- User naem and Password input -->
+    <div class="row" *ngIf="userPassword">
+      <div class="input-field col s12">
+        <input id="name" type="text" class="validate" [(ngModel)]="username" >
+        <label for="name">User name</label>
       </div>
 
-
-      <div class="row">
-        <p>
-          <input type="checkbox" class="filled-in" id="userPassword" name="userPassword" [(ngModel)]="userPassword" />
-          <label for="userPassword">User & Password</label>
-        </p>
-        <p>
-          <input type="checkbox" class="filled-in" id="client" name="client" [(ngModel)]="clientCHK" />
-          <label for="client">Client</label>
-        </p>
-        <p>
-          <input type="checkbox" class="filled-in" id="ssl"  />
-          <label for="ssl">SSL</label>
-        </p>
-
-        <a class="waves-effect waves-light btn">Save</a>
-        <a class="waves-effect waves-light btn" id="canCelBth" (click)="btnCancleClick()">Cancel</a>
+      <div class="input-field col s12">
+        <input id="password" type="password" class="validate" [(ngModel)]="password" >
+        <label for="password">Password</label>
       </div>
-    </form>
+    </div>
+
+    <!-- client id input -->
+      <div class="row" *ngIf="clientCHK">
+      <div class="input-field col s12">
+        <input id="clientId" type="text" class="validate" [(ngModel)]="clientId" >
+        <label for="clientId">Client id</label>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <p>
+        <input type="checkbox" class="filled-in" id="userPassword" name="userPassword" [(ngModel)]="userPassword" />
+        <label for="userPassword">User & Password</label>
+      </p>
+      <p>
+        <input type="checkbox" class="filled-in" id="client" name="client" [(ngModel)]="clientCHK" />
+        <label for="client">Client</label>
+      </p>
+      <p>
+        <input type="checkbox" class="filled-in" id="ssl"  />
+        <label for="ssl">SSL</label>
+      </p>
+
+      <a class="waves-effect waves-light btn" (click)="onSubmit()" >Save</a>
+      <a class="waves-effect waves-light btn" id="canCelBth" (click)="btnCancleClick()">Cancel</a>
+    </div>
+  <!-- </form> -->
   </div>
+</div>
