@@ -12,11 +12,12 @@ export class ConfigDataComponent implements OnInit {
   clientCHK: boolean = false;
   userPassword: boolean = false;
 
-  port: number;
-  prefix: string;
+  host: string = 'q.cmmc.io'
+  port: number = 9001;
+  prefix: string = 'CMMC'
   username: string;
   password: string;
-  clientId: string;
+  clientId: string = 'id1234';
 
 
   constructor(private router: Router) { }
@@ -36,5 +37,7 @@ export class ConfigDataComponent implements OnInit {
                 password = ${ this.password }
                 clientId = ${ this.clientId }
                 `)
+
   }
+
 }

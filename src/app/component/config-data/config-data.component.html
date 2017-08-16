@@ -4,7 +4,7 @@
     <h5>configualtion</h5>
     <div class="row">
       <div class="input-field col s12">
-        <input id="host" type="text" class="validate">
+        <input id="host" type="text" class="validate" [(ngModel)]="host" >
         <label for="host">Host*</label>
       </div>
 
@@ -35,7 +35,7 @@
     <!-- client id input -->
       <div class="row" *ngIf="clientCHK">
       <div class="input-field col s12">
-        <input id="clientId" type="text" class="validate" [(ngModel)]="clientId" >
+        <input id="clientId" type="text" class="validate" [(ngModel)]="clientId" [value]="clientId" >
         <label for="clientId">Client id</label>
       </div>
     </div>
