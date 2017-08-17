@@ -1,4 +1,4 @@
-const mockData: object[] =
+const mockData: Array<any> =
 [
     {
     "info": {

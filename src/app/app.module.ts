@@ -22,6 +22,25 @@ import { CardComponent } from './component/card/card.component';
 import { MoreDetailComponent } from './component/more-detail/more-detail.component';
 // pipe filter
 import { DevicesFilter } from './shared/devices-filter';
+//ngx-mqtt
+import { KeysPipe, StateToStringPipe, StateToClassPipe } from './pipes';
+import {
+  MqttMessage,
+  MqttModule,
+  MqttService,
+  MqttServiceOptions,
+  OnMessageEvent
+} from 'ngx-mqtt';
+
+export const MQTT_SERVICE_OPTIONS: MqttServiceOptions = {
+  hostname: 'q.cmmc.io',
+  port: 59001,
+  path: '/mqtt'
+};
+
+export function mqttServiceFactory() {
+  return new MqttService(MQTT_SERVICE_OPTIONS);
+}
 
 const routes: Routes = [
 // {
@@ -43,12 +62,19 @@ const routes: Routes = [
     ConfigDataComponent,
     DevicesFilter,
     CardComponent,
-    MoreDetailComponent
+    MoreDetailComponent,
+    KeysPipe,
+    StateToStringPipe,
+    StateToClassPipe
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(routes),
+    MqttModule.forRoot({
+      provide: MqttService,
+      useFactory: mqttServiceFactory
+    }),
     FormsModule,
     ReactiveFormsModule,
     MdButtonModule,
