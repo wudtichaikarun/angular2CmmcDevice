@@ -18,25 +18,27 @@ export type QoS = 0 | 1 | 2;
 
 export class HomeComponent implements OnInit {
   // mock data
-  devices: object[] = MockData;
+  devices = MockData.filter((devices) => {
+    return typeof devices !== 'string'
+  })
   // real data
   devicesReal: object[];
 
   //mqtt
-  public topic: string = 'CMMC/plug001';
-  public retain: boolean =true;
-  public qos: QoS = 0;
-  public filter: string = 'MARU/#';
-  public message: string;
+  topic: string = 'CMMC/plug001';
+  retain: boolean =true;
+  qos: QoS = 0;
+  filter: string = 'MARU/#';
+  message: string;
 
 
-  public myOtherMessage$: Observable<MqttMessage>;
+  myOtherMessage$: Observable<MqttMessage>;
 
-  public get state() {
+  get state() {
     return this.mqtt.state;
   }
 
-  public get observables() {
+  get observables() {
     return this.mqtt.observables;
   }
 
@@ -87,12 +89,12 @@ export class HomeComponent implements OnInit {
   // }
 
   // subscribe call by btn
-  public subscribe(filter: string): void {
+  subscribe(filter: string): void {
     this.mqtt.observe(filter);
   }
 
   // Unsubscribe call by btn
-  public unsubscribe(filter: string): void {
+  unsubscribe(filter: string): void {
     this.mqtt.observables[filter] = null;
   }
 
