@@ -9,21 +9,21 @@ import { Component, OnInit } from '@angular/core';
 export class MoreDetailComponent implements OnInit {
   device: Dictionary;
 
-  constructor () {}
+  constructor() {}
 
-  infoKeys (): Array<string> {
+  infoKeys(): Array<string> {
     return Object.keys(this.device.info);
   }
 
-  dKeys (): Array<string> {
+  dKeys(): Array<string> {
     return Object.keys(this.device.d);
   }
 
-  ngOnInit () {
+  ngOnInit() {
   }
 
 }
 
 interface Dictionary {
-  [index : string ] : string;
+  [index: string ]: string;
 }
