@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { MoreDetailComponent } from '../more-detail/more-detail.component'
-import { MdDialog } from '@angular/material'
-
+import { MoreDetailComponent } from '../more-detail/more-detail.component';
+import { MdDialog } from '@angular/material';
 
 @Component({
   selector: 'app-card',
@@ -9,15 +8,16 @@ import { MdDialog } from '@angular/material'
   styleUrls: ['./card.component.css']
 })
 export class CardComponent implements OnInit {
-  @Input() content
-  constructor ( public dialog: MdDialog ) { }
+  @Input() content;
+
+  constructor(public dialog: MdDialog) { }
 
   ngOnInit() {
   }
 
-  showDetail (content) {
-    let dialogRet = this.dialog.open(MoreDetailComponent)
-    dialogRet.componentInstance.device = content
+  showDetail(content) {
+    let dialogRet = this.dialog.open(MoreDetailComponent);
+    dialogRet.componentInstance.device = content;
   }
 
 }
