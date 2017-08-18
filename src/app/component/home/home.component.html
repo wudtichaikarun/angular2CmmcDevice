@@ -2,21 +2,21 @@
 
   <!-- search and autocomplete -->
   <md-input-container>
-      <input type="tel" mdInput placeholder="sharch by device name" [mdAutocomplete]="auto" [formControl]="stateCtrl">
-      <md-icon mdSuffix>
-        search
-      </md-icon>
+    <input type="tel" mdInput placeholder="sharch by device name" [mdAutocomplete]="auto" [formControl]="stateCtrl">
+    <md-icon mdSuffix>
+      search
+    </md-icon>
   </md-input-container>
 
-  <md-autocomplete #auto="mdAutocomplete" [displayWith]="displayFn"  >
+  <md-autocomplete #auto="mdAutocomplete" [displayWith]="displayFn">
     <md-option *ngFor="let state of filteredStates | async" [value]="state" (click)="valueChange(state)">
       {{ state }}
     </md-option>
   </md-autocomplete>
 
   <!-- filter deviecs -->
-  <md-select placeholder="filter device" >
-    <md-option *ngFor="let status of devicesStatus" [value]="status.value" (click)="onMySelectChange(status.value)" >
+  <md-select placeholder="filter device">
+    <md-option *ngFor="let status of devicesStatus" [value]="status.value" (click)="onMySelectChange(status.value)">
       {{ status.viewValue }}
     </md-option>
   </md-select>
@@ -29,15 +29,15 @@
   <app-card
     class="col m6 l3"
     *ngFor="let device of devices | filterStatus: selectValue"
-    [content]="device" >
+    [content]="device">
   </app-card>
 
 </div>
 
 <div *ngFor="let filter of observables | keys">
-  <p><b>Prefix =</b>  {{ (observables[filter] | async)?.topic }}</p>
-  <p><b>cmd =</b>  {{ (observables[filter] | async)?.cmd }}</p>
-  <p><b>qos =</b>  {{ (observables[filter] | async)?.qos }}</p>
-  <textarea class="form-control" style="height: 200px" > payload = {{ (observables[filter] | async)?.payload.toString() }}</textarea>
+  <p><b>Prefix =</b> {{ (observables[filter] | async)?.topic }}</p>
+  <p><b>cmd =</b> {{ (observables[filter] | async)?.cmd }}</p>
+  <p><b>qos =</b> {{ (observables[filter] | async)?.qos }}</p>
+  <textarea class="form-control" style="height: 200px"> payload = {{ (observables[filter] | async)?.payload.toString() }}</textarea>
 </div>
 <textarea class="form-control" style="height: 200px"> devicesReal = {{ devicesReal }} </textarea>

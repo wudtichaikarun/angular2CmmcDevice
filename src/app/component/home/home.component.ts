@@ -5,7 +5,8 @@ import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/take';
 
-//ngx-mqtt
+// ngx-mqtt
+
 import { MqttService, MqttMessage } from 'ngx-mqtt';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
@@ -20,9 +21,8 @@ export type QoS = 0 | 1 | 2;
 
 export class HomeComponent implements OnInit {
   // mock data
-  devices = MockData.filter((devices) => {
-    return typeof devices !== 'string';
-  });
+  devices = [];
+  devicesUnique: object = {};
   // real data
   devicesReal: any;
 
@@ -78,25 +78,18 @@ export class HomeComponent implements OnInit {
     // })
 
     mqtt.onMessage.subscribe((e) => {
-      // const filterPayload = payload.filter((items) =>{
-      //   return typeof items !== 'string'
-      // })
-
+      const retained = e.retain;
       const payload = e.payload.toString();
+      // console.log(`retained = ${retained}`);
       this.devicesReal = payload;
-      const payloadType = typeof payload;
-
-      //  const payloadRespose:ObjectInResponseArray = JSON.parse(payload).forEach(item => {
-      //     console.log(item);
-      //   })
-
       if (e.topic.indexOf('/status') > 0) {
         const object = JSON.parse(payload);
-        // console.log(`payload type = ${payloadType}`);
-        // console.log(this.devicesReal);
-
-        console.log(`topic = ${e.topic}`);
-        console.log(`object = `, object);
+        // assume that retained devices are died
+        if (retained) {
+          object.info.client_id = undefined;
+        }
+        this.devicesUnique[object.d.myName] = object;
+        this.devices = Object.keys(this.devicesUnique).map((v, k) => this.devicesUnique[v]);
       }
     });
   }

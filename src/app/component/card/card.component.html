@@ -53,7 +53,7 @@
         <!-- run time value -->
         <p class="detailFont">{{ ((content.d.millis/1000*24)/(86400)).toFixed(5) }} hours</p>
         <!-- prefix value -->
-        <p class="detailFont">{{ content.info.prefix }}/{{ content.info.device_id || content.d.device_id }}/status</p>
+        <p class="detailFont">{{ content.info.prefix }}{{ content.info.device_id || content.d.device_id }}/status</p>
       </div>
     </div>
 
