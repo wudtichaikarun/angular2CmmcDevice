@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
   qos: QoS = 0;
   filter: string = 'MARU/#';
   message: string;
-  myOtherMessage$: Observable<MqttMessage>;
+  // myOtherMessage$: Observable<MqttMessage>;
 
   get state() {
     return this.mqtt.state;
@@ -79,8 +79,12 @@ export class HomeComponent implements OnInit {
                 object.info.client_id = undefined;
               }
               this.devicesUnique[object.d.myName] = object;
-              this.devices = Object.keys(this.devicesUnique).map((v, k) => this.devicesUnique[v]);
-              resolve(this.devices)
+              this.devices = Object.keys(this.devicesUnique).map((v, k) => {
+                console.log(`v: ${v} ||  k: ${k}`);
+                return this.devicesUnique[v];
+              })
+              console.log(this.devices);
+              resolve(this.devices);
             }
           })
         }
@@ -119,6 +123,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.subscribe(this.filter);
+    //console.log(`myOtherMessage: ${this.myOtherMessage$}`)
   }
 
   // Create array devices.d.myName
