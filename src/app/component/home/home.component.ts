@@ -1,12 +1,9 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { MockData } from '../../shared/mock-data';
+import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/take';
 
 // ngx-mqtt
-
 import { MqttService, MqttMessage } from 'ngx-mqtt';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
@@ -20,13 +17,13 @@ export type QoS = 0 | 1 | 2;
 })
 
 export class HomeComponent implements OnInit {
-  // mock data
-  devices = [];
-  devicesUnique: object = {};
-  // real data
-  devicesReal: any;
+  @ViewChild('searchValue') searchValue;
 
-  // mqtt
+  devices:object[] ;
+  devicesUnique: object = {};
+  sharchValue: string = 'hello'
+
+  // Mqtt variable
   topic: string = 'CMMC/plug001';
   retain: boolean = true;
   qos: QoS = 0;
@@ -53,45 +50,45 @@ export class HomeComponent implements OnInit {
   stateCtrl: FormControl;
   filteredStates: any;
 
-  constructor(private mqtt: MqttService,
-              private cdRef: ChangeDetectorRef) {
-    // this.mqtt.observe('CMMC/plug001')
-    //     .subscribe((msg: MqttMessage) => {
-    //       this.myMessage = msg.payload.toString()
-    //     });
+  constructor(
+    private mqtt: MqttService,
+    private cdRef: ChangeDetectorRef) {
 
-    // sharch and autocompleat
-    this.stateCtrl = new FormControl();
-    this.filteredStates = this.stateCtrl.valueChanges
-      .startWith(null)
-      .map(name => this.filterStates(name));
+      // Sharch and autocompleat
+      this.stateCtrl = new FormControl();
+      this.filteredStates = this.stateCtrl.valueChanges
+        .startWith(null)
+        .map(name => this.filterStates(name));
 
-    mqtt.onConnect.subscribe((e) => console.log('onConnect', e));
-    mqtt.onError.subscribe((e) => console.log('onError', e));
-    mqtt.onClose.subscribe(() => console.log('onClose'));
-    mqtt.onReconnect.subscribe(() => console.log('onReconnect'));
-
-    // const output$ =  mqtt.onMessage.take(4)
-    // output$.subscribe((e) => {
-    //   console.log('output', e.payload.toString())
-    //  this.devicesReal = e.payload.toString()
-    // })
-
-    mqtt.onMessage.subscribe((e) => {
-      const retained = e.retain;
-      const payload = e.payload.toString();
-      // console.log(`retained = ${retained}`);
-      this.devicesReal = payload;
-      if (e.topic.indexOf('/status') > 0) {
-        const object = JSON.parse(payload);
-        // assume that retained devices are died
-        if (retained) {
-          object.info.client_id = undefined;
+      // Mqtt event
+      mqtt.onConnect.subscribe((e) => console.log('onConnect', e));
+      mqtt.onError.subscribe((e) => console.log('onError', e));
+      mqtt.onClose.subscribe(() => console.log('onClose'));
+      mqtt.onReconnect.subscribe(() => console.log('onReconnect'));
+      mqtt.onMessage.subscribe((e) => {
+        const retained = e.retain;
+        const payload = e.payload.toString();
+        // console.log(e)
+        // console.log(`retained = ${retained}`);
+        const doAsync = () => {
+          return new Promise ((resolve, reject) => {
+            if (e.topic.indexOf('/status') > 0) {
+              const object = JSON.parse(payload);
+              // assume that retained devices are died
+              if (retained) {
+                object.info.client_id = undefined;
+              }
+              this.devicesUnique[object.d.myName] = object;
+              this.devices = Object.keys(this.devicesUnique).map((v, k) => this.devicesUnique[v]);
+              resolve(this.devices)
+            }
+          })
         }
-        this.devicesUnique[object.d.myName] = object;
-        this.devices = Object.keys(this.devicesUnique).map((v, k) => this.devicesUnique[v]);
-      }
-    });
+
+        doAsync().then((devices) =>{
+          this.getDeviceName(devices);
+        })
+      });
   }
 
   // public unsafePublish(topic: string, message: string): void {
@@ -104,7 +101,7 @@ export class HomeComponent implements OnInit {
   //     .subscribe((err) => console.log(err));
   // }
 
-  // subscribe call by btn
+  // Subscribe call by btn
   subscribe(filter: string): void {
     this.mqtt.observe(filter);
   }
@@ -114,20 +111,17 @@ export class HomeComponent implements OnInit {
     this.mqtt.observables[filter] = null;
   }
 
-  // filterStates call by btn key prefix vaule ex. 'MARU/#'
+  // FilterStates call by btn key prefix vaule ex. 'MARU/#'
   filterStates(val: string) {
     return val ? this.states.filter(s => s.toLowerCase().indexOf(val.toLowerCase()) === 0)
       : this.states;
   }
 
   ngOnInit() {
-    this.getDeviceName(this.devices);
-    // console.log(this.myMessage)
-
     this.subscribe(this.filter);
   }
 
-  // create array devices.d.myName
+  // Create array devices.d.myName
   getDeviceName(devices) {
     const deviceName = devices.map((device) => {
       return device.d.myName;
@@ -135,23 +129,21 @@ export class HomeComponent implements OnInit {
     this.states = deviceName;
   }
 
-  // filter device all | online | ofline
+  // Filter device all | online | ofline
   onMySelectChange(value: string) {
+    event.preventDefault();
     this.selectValue = value;
+    this.searchValue.nativeElement.value = '';
   }
 
-  // sharch and pagination
+  // Sharch and pagination
   displayFn(state): string {
     return state;
   }
 
-  valueChange(state: string) {
+  // Sherch
+  autoCompleteValueChange(state: string) {
     this.selectValue = state;
   }
 
-}
-
-interface ObjectInResponseArray {
-  info: object;
-  d: object;
 }

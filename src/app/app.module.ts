@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Routes, RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+// Material
 import {
   MdButtonModule,
   MdSidenavModule,
@@ -13,6 +15,8 @@ import {
   MdInputModule,
   MdCardModule
 } from '@angular/material';
+
+// Conponent
 import { AppComponent } from './app.component';
 import { NavComponent } from './component/nav/nav.component';
 import { HomeComponent } from './component/home/home.component';
@@ -20,10 +24,12 @@ import { FooterComponent } from './component/footer/footer.component';
 import { ConfigDataComponent } from './component/config-data/config-data.component';
 import { CardComponent } from './component/card/card.component';
 import { MoreDetailComponent } from './component/more-detail/more-detail.component';
-// pipe filter
+
+// Pipe filter
 import { DevicesFilter } from './shared/devices-filter';
-// ngx-mqtt
-import { KeysPipe, StateToStringPipe, StateToClassPipe } from './pipes';
+
+// Ngx-mqtt
+import { KeysPipe, StateToStringPipe, StateToClassPipe } from './shared/pipes';
 import {
   MqttMessage,
   MqttModule,
@@ -47,10 +53,10 @@ const routes: Routes = [
 //     path: '', redirectTo:'config',
 //     pathMatch: 'full'
 // },
-  {
-    path: 'home',
-    component: HomeComponent
-  }
+// {
+//   path: 'home',
+//   component: HomeComponent
+// }
 ];
 
 @NgModule({
