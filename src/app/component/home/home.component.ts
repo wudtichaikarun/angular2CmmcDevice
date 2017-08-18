@@ -9,6 +9,7 @@ import 'rxjs/add/operator/take';
 import { MqttService, MqttMessage } from 'ngx-mqtt';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
+
 export type QoS = 0 | 1 | 2;
 
 @Component({
@@ -20,14 +21,14 @@ export type QoS = 0 | 1 | 2;
 export class HomeComponent implements OnInit {
   // mock data
   devices = MockData.filter((devices) => {
-    return typeof devices !== 'string'
-  })
+    return typeof devices !== 'string';
+  });
   // real data
   devicesReal: any;
 
-  //mqtt
+  // mqtt
   topic: string = 'CMMC/plug001';
-  retain: boolean =true;
+  retain: boolean = true;
   qos: QoS = 0;
   filter: string = 'MARU/#';
   message: string;
@@ -43,58 +44,62 @@ export class HomeComponent implements OnInit {
 
   // variable for sharch and filter
   devicesStatus: object[] = [
-    { value: 'all', viewValue: 'SHOW ALL' },
-    { value: 'online', viewValue: 'ON LINE' },
-    { value: 'ofline', viewValue: 'OFF LINE' }
-  ]
+    {value: 'all', viewValue: 'SHOW ALL'},
+    {value: 'online', viewValue: 'ON LINE'},
+    {value: 'ofline', viewValue: 'OFF LINE'}
+  ];
   selectValue: string = 'all';
   states: string[];
   stateCtrl: FormControl;
   filteredStates: any;
 
-  constructor (
-    private mqtt: MqttService,
-    private cdRef: ChangeDetectorRef) {
-      // this.mqtt.observe('CMMC/plug001')
-      //     .subscribe((msg: MqttMessage) => {
-      //       this.myMessage = msg.payload.toString()
-      //     });
+  constructor(private mqtt: MqttService,
+              private cdRef: ChangeDetectorRef) {
+    // this.mqtt.observe('CMMC/plug001')
+    //     .subscribe((msg: MqttMessage) => {
+    //       this.myMessage = msg.payload.toString()
+    //     });
 
-      // sharch and autocompleat
-      this.stateCtrl = new FormControl()
-      this.filteredStates = this.stateCtrl.valueChanges
-          .startWith(null)
-          .map(name => this.filterStates(name));
+    // sharch and autocompleat
+    this.stateCtrl = new FormControl();
+    this.filteredStates = this.stateCtrl.valueChanges
+      .startWith(null)
+      .map(name => this.filterStates(name));
 
-      mqtt.onConnect.subscribe((e) => console.log('onConnect', e));
-      mqtt.onError.subscribe((e) => console.log('onError', e));
-      mqtt.onClose.subscribe(() => console.log('onClose'));
-      mqtt.onReconnect.subscribe(() => console.log('onReconnect'));
+    mqtt.onConnect.subscribe((e) => console.log('onConnect', e));
+    mqtt.onError.subscribe((e) => console.log('onError', e));
+    mqtt.onClose.subscribe(() => console.log('onClose'));
+    mqtt.onReconnect.subscribe(() => console.log('onReconnect'));
 
-      // const output$ =  mqtt.onMessage.take(4)
-      // output$.subscribe((e) => {
-      //   console.log('output', e.payload.toString())
-      //  this.devicesReal = e.payload.toString()
+    // const output$ =  mqtt.onMessage.take(4)
+    // output$.subscribe((e) => {
+    //   console.log('output', e.payload.toString())
+    //  this.devicesReal = e.payload.toString()
+    // })
+
+    mqtt.onMessage.subscribe((e) => {
+      // const filterPayload = payload.filter((items) =>{
+      //   return typeof items !== 'string'
       // })
 
-      mqtt.onMessage.subscribe((e) => {
-        // const filterPayload = payload.filter((items) =>{
-        //   return typeof items !== 'string'
-        // })
-
-        const payload = e.payload.toString()
-        this.devicesReal = payload
-        const payloadType = typeof payload
+      const payload = e.payload.toString();
+      this.devicesReal = payload;
+      const payloadType = typeof payload;
 
       //  const payloadRespose:ObjectInResponseArray = JSON.parse(payload).forEach(item => {
       //     console.log(item);
       //   })
 
-        console.log(`payload type = ${payloadType}`)
-        console.log(this.devicesReal)
-      });
-  }
+      if (e.topic.indexOf('/status') > 0) {
+        const object = JSON.parse(payload);
+        // console.log(`payload type = ${payloadType}`);
+        // console.log(this.devicesReal);
 
+        console.log(`topic = ${e.topic}`);
+        console.log(`object = `, object);
+      }
+    });
+  }
 
   // public unsafePublish(topic: string, message: string): void {
   //   this.mqtt.unsafePublish(topic, message, {qos: 1, retain: true});
@@ -117,36 +122,37 @@ export class HomeComponent implements OnInit {
   }
 
   // filterStates call by btn key prefix vaule ex. 'MARU/#'
-  filterStates (val: string) {
+  filterStates(val: string) {
     return val ? this.states.filter(s => s.toLowerCase().indexOf(val.toLowerCase()) === 0)
-               : this.states
+      : this.states;
   }
 
-  ngOnInit () {
+  ngOnInit() {
     this.getDeviceName(this.devices);
     // console.log(this.myMessage)
 
-    this.subscribe(this.filter)
+    this.subscribe(this.filter);
   }
 
   // create array devices.d.myName
-  getDeviceName (devices) {
+  getDeviceName(devices) {
     const deviceName = devices.map((device) => {
       return device.d.myName;
-    })
+    });
     this.states = deviceName;
   }
 
   // filter device all | online | ofline
-  onMySelectChange (value: string) {
+  onMySelectChange(value: string) {
     this.selectValue = value;
   }
 
   // sharch and pagination
-  displayFn (state): string {
+  displayFn(state): string {
     return state;
   }
-  valueChange (state: string) {
+
+  valueChange(state: string) {
     this.selectValue = state;
   }
 
@@ -155,5 +161,4 @@ export class HomeComponent implements OnInit {
 interface ObjectInResponseArray {
   info: object;
   d: object;
-
 }

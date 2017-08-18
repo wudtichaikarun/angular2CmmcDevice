@@ -22,7 +22,7 @@ import { CardComponent } from './component/card/card.component';
 import { MoreDetailComponent } from './component/more-detail/more-detail.component';
 // pipe filter
 import { DevicesFilter } from './shared/devices-filter';
-//ngx-mqtt
+// ngx-mqtt
 import { KeysPipe, StateToStringPipe, StateToClassPipe } from './pipes';
 import {
   MqttMessage,
@@ -51,7 +51,7 @@ const routes: Routes = [
     path: 'home',
     component: HomeComponent
   }
-]
+];
 
 @NgModule({
   declarations: [
@@ -94,4 +94,4 @@ const routes: Routes = [
     AppComponent
   ]
 })
-export class AppModule { }
+export class AppModule {}
