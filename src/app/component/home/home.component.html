@@ -35,6 +35,7 @@
 </div>
 
 <div *ngFor="let filter of observables | keys">
+  <p><b>filter =</b>{{filter}} </p>
   <p><b>Prefix =</b>  {{ (observables[filter] | async)?.topic }}</p>
   <p><b>cmd =</b>  {{ (observables[filter] | async)?.cmd }}</p>
   <p><b>qos =</b>  {{ (observables[filter] | async)?.qos }}</p>

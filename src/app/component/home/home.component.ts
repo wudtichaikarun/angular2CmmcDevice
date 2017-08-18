@@ -73,7 +73,10 @@ export class HomeComponent implements OnInit {
 
       // const output$ =  mqtt.onMessage.take(4)
       // output$.subscribe((e) => {
+      //   const prifix = e.topic
       //   console.log('output', e.payload.toString())
+      //   console.log('topic',prifix)
+      //   console.log(this.observables[this.filter])
       //  this.devicesReal = e.payload.toString()
       // })
 
@@ -91,7 +94,7 @@ export class HomeComponent implements OnInit {
       //   })
 
         console.log(`payload type = ${payloadType}`)
-        console.log(this.devicesReal)
+        console.log(e)
       });
   }
 
