@@ -41,4 +41,7 @@
   <p><b>qos =</b>  {{ (observables[filter] | async)?.qos }}</p>
   <textarea class="form-control" style="height: 200px" > payload = {{ (observables[filter] | async)?.payload.toString() }}</textarea>
 </div>
-<textarea class="form-control" style="height: 200px"> devicesReal = {{ devicesReal }} </textarea>
+<!-- <textarea class="form-control" style="height: 200px"> devicesReal = {{ devicesReal }} </textarea> -->
+<div *ngFor="let device of devicesReal" >
+  {{ device }}
+</div>
