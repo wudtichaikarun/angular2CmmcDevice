@@ -90,6 +90,7 @@ export class HomeComponent implements OnInit {
         }
         this.devicesUnique[object.d.myName] = object;
         this.devices = Object.keys(this.devicesUnique).map((v, k) => this.devicesUnique[v]);
+
       }
     });
   }
@@ -121,7 +122,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getDeviceName(this.devices);
+    this.getDeviceName(this.devices)
     // console.log(this.myMessage)
 
     this.subscribe(this.filter);

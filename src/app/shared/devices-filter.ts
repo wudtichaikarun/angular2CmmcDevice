@@ -13,13 +13,13 @@ export class DevicesFilter implements PipeTransform {
     // Filter ON LINE
     else if(filter === 'online'){
       return items.filter((item) => {
-        return item.info.client_id !== null;
+        return item.info.client_id !== undefined;
       })
     }
     // Filter OFF LINE
     else if (filter === 'ofline') {
       return items.filter((item) => {
-        return item.info.client_id === null;
+        return item.info.client_id === undefined;
       })
     }
     // Sahrch by device name
