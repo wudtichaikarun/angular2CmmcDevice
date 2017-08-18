@@ -3,6 +3,7 @@ import { MockData } from '../../shared/mock-data';
 import { FormControl } from '@angular/forms';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/take';
 
 //ngx-mqtt
 import { MqttService, MqttMessage } from 'ngx-mqtt';
@@ -22,7 +23,7 @@ export class HomeComponent implements OnInit {
     return typeof devices !== 'string'
   })
   // real data
-  devicesReal: object[];
+  devicesReal: any;
 
   //mqtt
   topic: string = 'CMMC/plug001';
@@ -30,8 +31,6 @@ export class HomeComponent implements OnInit {
   qos: QoS = 0;
   filter: string = 'MARU/#';
   message: string;
-
-
   myOtherMessage$: Observable<MqttMessage>;
 
   get state() {
@@ -71,12 +70,31 @@ export class HomeComponent implements OnInit {
       mqtt.onError.subscribe((e) => console.log('onError', e));
       mqtt.onClose.subscribe(() => console.log('onClose'));
       mqtt.onReconnect.subscribe(() => console.log('onReconnect'));
+
+      // const output$ =  mqtt.onMessage.take(4)
+      // output$.subscribe((e) => {
+      //   console.log('output', e.payload.toString())
+      //  this.devicesReal = e.payload.toString()
+      // })
+
       mqtt.onMessage.subscribe((e) => {
-        //console.log('onMessage', e.payload.toString())
-        this.devicesReal = e.payload.toString()
+        // const filterPayload = payload.filter((items) =>{
+        //   return typeof items !== 'string'
+        // })
+
+        const payload = e.payload.toString()
+        this.devicesReal = payload
+        const payloadType = typeof payload
+
+      //  const payloadRespose:ObjectInResponseArray = JSON.parse(payload).forEach(item => {
+      //     console.log(item);
+      //   })
+
+        console.log(`payload type = ${payloadType}`)
         console.log(this.devicesReal)
       });
   }
+
 
   // public unsafePublish(topic: string, message: string): void {
   //   this.mqtt.unsafePublish(topic, message, {qos: 1, retain: true});
@@ -131,5 +149,11 @@ export class HomeComponent implements OnInit {
   valueChange (state: string) {
     this.selectValue = state;
   }
+
+}
+
+interface ObjectInResponseArray {
+  info: object;
+  d: object;
 
 }

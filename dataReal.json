@@ -1,0 +1,26 @@
+{
+  "info": {
+    "ssid": "Autonics_Technology_Fibre",
+    "flash_size": 524288,
+    "flash_id": "1640e0",
+    "chip_id": "197491",
+    "sdk": "1.5.3(aec24ac9)",
+    "mac": "5C:CF:7F:19:74:91",
+    "client_id": "1668241",
+    "device_id": "1668241",
+    "prefix": "MARU/",
+    "ip": "192.168.1.113",
+    "version": 0.99
+  },
+  "d": {
+    "myName": "J-007",
+    "millis": 76575813,
+    "temperature_c": 25,
+    "humidity_percent_rh": 92,
+    "state": 0,
+    "heap": 39688,
+    "rssi": -63,
+    "counter": 7658,
+    "subscription": 1
+  }
+}
