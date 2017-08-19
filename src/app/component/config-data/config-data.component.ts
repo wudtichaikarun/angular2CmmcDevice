@@ -17,7 +17,7 @@ export class ConfigDataComponent implements OnInit {
   prefix: string = 'CMMC';
   username: string;
   password: string;
-  clientId: string = 'devicesWs-' + Math.random(1000).toFixed(2);
+  clientId: string = 'devicesWs-' + (Math.random() * 1000).toFixed(2);
 
   constructor(private router: Router) { }
 
