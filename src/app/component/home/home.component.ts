@@ -10,6 +10,7 @@ import 'rxjs/add/operator/take';
 import { MqttService, MqttMessage } from 'ngx-mqtt';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
+import { AppConstants } from '../../shared/AppConstants';
 
 export type QoS = 0 | 1 | 2;
 
@@ -44,9 +45,9 @@ export class HomeComponent implements OnInit {
 
   // variable for sharch and filter
   devicesStatus: object[] = [
-    {value: 'all', viewValue: 'SHOW ALL'},
-    {value: 'online', viewValue: 'ON LINE'},
-    {value: 'ofline', viewValue: 'OFF LINE'}
+    {value: AppConstants.FILTER_ALL, viewValue: 'SHOW ALL'},
+    {value: AppConstants.FILTER_ONLINE, viewValue: 'ON LINE'},
+    {value: AppConstants.FILTER_OFFLINE, viewValue: 'OFF LINE'}
   ];
   selectValue: string = 'all';
   states: string[];
@@ -55,12 +56,8 @@ export class HomeComponent implements OnInit {
 
   constructor(private mqtt: MqttService,
               private cdRef: ChangeDetectorRef) {
-    // this.mqtt.observe('CMMC/plug001')
-    //     .subscribe((msg: MqttMessage) => {
-    //       this.myMessage = msg.payload.toString()
-    //     });
 
-    // sharch and autocompleat
+    // search and auto complete
     this.stateCtrl = new FormControl();
     this.filteredStates = this.stateCtrl.valueChanges
       .startWith(null)
@@ -70,12 +67,6 @@ export class HomeComponent implements OnInit {
     mqtt.onError.subscribe((e) => console.log('onError', e));
     mqtt.onClose.subscribe(() => console.log('onClose'));
     mqtt.onReconnect.subscribe(() => console.log('onReconnect'));
-
-    // const output$ =  mqtt.onMessage.take(4)
-    // output$.subscribe((e) => {
-    //   console.log('output', e.payload.toString())
-    //  this.devicesReal = e.payload.toString()
-    // })
 
     mqtt.onMessage.subscribe((e) => {
       const retained = e.retain;
@@ -98,16 +89,6 @@ export class HomeComponent implements OnInit {
       }
     });
   }
-
-  // public unsafePublish(topic: string, message: string): void {
-  //   this.mqtt.unsafePublish(topic, message, {qos: 1, retain: true});
-  // }
-
-  // public publish(topic: string, message: string, retain = false, qos: QoS = 0): void {
-  //   this.mqtt
-  //     .publish(topic, message, { retain, qos })
-  //     .subscribe((err) => console.log(err));
-  // }
 
   // subscribe call by btn
   subscribe(filter: string): void {
