@@ -83,13 +83,17 @@ export class HomeComponent implements OnInit {
       // console.log(`retained = ${retained}`);
       this.devicesReal = payload;
       if (e.topic.indexOf('/status') > 0) {
-        const object = JSON.parse(payload);
-        // assume that retained devices are died
-        if (retained) {
-          object.info.client_id = undefined;
+        try {
+          const object = JSON.parse(payload);
+          // assume that retained devices are died
+          if (retained) {
+            object.info.client_id = undefined;
+          }
+          this.devicesUnique[object.d.myName] = object;
+          this.devices = Object.keys(this.devicesUnique).map((v, k) => this.devicesUnique[v]);
+        } catch (exception) {
+          console.error(exception);
         }
-        this.devicesUnique[object.d.myName] = object;
-        this.devices = Object.keys(this.devicesUnique).map((v, k) => this.devicesUnique[v]);
 
       }
     });
@@ -122,7 +126,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getDeviceName(this.devices)
+    this.getDeviceName(this.devices);
     // console.log(this.myMessage)
 
     this.subscribe(this.filter);
