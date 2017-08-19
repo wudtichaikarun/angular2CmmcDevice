@@ -108,17 +108,12 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.getDeviceName(this.devices);
-    // console.log(this.myMessage)
-
     this.subscribe(this.filter);
   }
 
   // create array devices.d.myName
   getDeviceName(devices) {
-    const deviceName = devices.map((device) => {
-      return device.d.myName;
-    });
-    this.states = deviceName;
+    this.states = devices.map((device) => device.d.myName);
   }
 
   // filter device all | online | ofline
