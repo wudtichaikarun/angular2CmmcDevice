@@ -2,11 +2,13 @@ import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/take';
 
 // ngx-mqtt
 import { MqttService, MqttMessage } from 'ngx-mqtt';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
+import { AppConstants } from '../../shared/AppConstants';
 
 export type QoS = 0 | 1 | 2;
 
@@ -46,7 +48,7 @@ export class HomeComponent implements OnInit {
     {value: 'ofline', viewValue: 'OFF LINE'}
   ];
   selectValue: string = 'all';
-  states: string[];
+  arrayDeviceName: string[];
   stateCtrl: FormControl;
   filteredStates: any;
 
@@ -58,7 +60,7 @@ export class HomeComponent implements OnInit {
       this.stateCtrl = new FormControl();
       this.filteredStates = this.stateCtrl.valueChanges
         .startWith(null)
-        .map(name => this.filterStates(name));
+        .map(deviceName => this.filterStates(deviceName));
 
       // Mqtt event
       mqtt.onConnect.subscribe((e) => console.log('onConnect', e));
@@ -80,10 +82,10 @@ export class HomeComponent implements OnInit {
               }
               this.devicesUnique[object.d.myName] = object;
               this.devices = Object.keys(this.devicesUnique).map((v, k) => {
-                console.log(`v: ${v} ||  k: ${k}`);
+                // console.log(`v: ${v} ||  k: ${k}`);
                 return this.devicesUnique[v];
               })
-              console.log(this.devices);
+              // console.log(this.devices);
               resolve(this.devices);
             }
           })
@@ -116,9 +118,9 @@ export class HomeComponent implements OnInit {
   }
 
   // FilterStates call by btn key prefix vaule ex. 'MARU/#'
-  filterStates(val: string) {
-    return val ? this.states.filter(s => s.toLowerCase().indexOf(val.toLowerCase()) === 0)
-      : this.states;
+  filterStates(deviceName: string) {
+    return deviceName ? this.arrayDeviceName.filter(dName => dName.toString().toLowerCase().indexOf(deviceName.toLowerCase()) === 0)
+      : this.arrayDeviceName;
   }
 
   ngOnInit() {
@@ -128,10 +130,10 @@ export class HomeComponent implements OnInit {
 
   // Create array devices.d.myName
   getDeviceName(devices) {
-    const deviceName = devices.map((device) => {
+    const deviceName: string[] = devices.map((device) => {
       return device.d.myName;
     });
-    this.states = deviceName;
+    this.arrayDeviceName = deviceName;
   }
 
   // Filter device all | online | ofline
@@ -142,13 +144,13 @@ export class HomeComponent implements OnInit {
   }
 
   // Sharch and pagination
-  displayFn(state): string {
-    return state;
+  displayFn(dName): string {
+    return dName;
   }
 
   // Sherch
-  autoCompleteValueChange(state: string) {
-    this.selectValue = state;
+  autoCompleteValueChange(dName: string) {
+    this.selectValue = dName;
   }
 
 }

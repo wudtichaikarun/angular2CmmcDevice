@@ -34,18 +34,20 @@ import {
   MqttMessage,
   MqttModule,
   MqttService,
-  MqttServiceOptions,
   OnMessageEvent
 } from 'ngx-mqtt';
 
-export const MQTT_SERVICE_OPTIONS: MqttServiceOptions = {
-  hostname: 'q.cmmc.io',
-  port: 59001,
-  path: '/mqtt'
-};
+// export const MQTT_SERVICE_OPTIONS: MqttServiceOptions = {
+//   hostname: 'q.cmmc.io',
+//   port: 59001,
+//   path: '/mqtt'
+// };
+
+const servicMqtt = new AppComponent();
+const mqttServiceOption = servicMqtt.MQTT_SERVICE_OPTIONS
 
 export function mqttServiceFactory() {
-  return new MqttService(MQTT_SERVICE_OPTIONS);
+  return new MqttService(mqttServiceOption);
 }
 
 const routes: Routes = [
