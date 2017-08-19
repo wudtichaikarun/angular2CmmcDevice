@@ -49,7 +49,7 @@ export class HomeComponent implements OnInit {
     {value: AppConstants.FILTER_ONLINE, viewValue: 'ON LINE'},
     {value: AppConstants.FILTER_OFFLINE, viewValue: 'OFF LINE'}
   ];
-  selectValue: string = 'all';
+  selectValue: string = AppConstants.FILTER_ALL;
   states: string[];
   stateCtrl: FormControl;
   filteredStates: any;
