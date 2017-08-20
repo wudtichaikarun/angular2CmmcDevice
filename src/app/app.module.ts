@@ -39,28 +39,27 @@ import {
   OnMessageEvent
 } from 'ngx-mqtt';
 
-
 const servicMqtt = new AppComponent();
-const mqttServiceOption = servicMqtt.MQTT_SERVICE_OPTIONS
+const mqttServiceOption = servicMqtt.MQTT_SERVICE_OPTIONS;
 
 export function mqttServiceFactory() {
   return new MqttService(mqttServiceOption);
 }
 
 const routes: Routes = [
-{
-    path: '', redirectTo:'home',
+  {
+    path: '', redirectTo: 'home',
     pathMatch: 'full'
-},{
-  path: 'home',
-  component: HomeComponent
-},{
-  path: 'help',
-  component: HelpComponent
-},{
-  path: 'about',
-  component: AboutUsComponent
-}
+  }, {
+    path: 'home',
+    component: HomeComponent
+  }, {
+    path: 'help',
+    component: HelpComponent
+  }, {
+    path: 'about',
+    component: AboutUsComponent
+  }
 ];
 
 @NgModule({
