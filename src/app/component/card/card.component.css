@@ -1,38 +1,47 @@
-.row{
+.card {
+  max-width: 350px;
+}
+
+.row {
   margin: 0 5px 5px 5px;
 }
-.homeHeader{
+
+.homeHeader {
   text-align: center;
   height: 50px;
 }
-.card{
+
+.card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 /* card status color */
-.connect{
-    border: 25px solid palegreen;
+.connect {
+  background: palegreen;
+  padding: 12px;
 }
 
-.disconnect{
-     border: 25px solid orange;
-  }
-
-.card-content{
-    background-color: white;
-    padding: 5px;
+.disconnect {
+  background: orange;
+  padding: 12px;
 }
-.text-darken-4{
+
+.card-content {
+  padding: 5px;
+}
+
+.text-darken-4 {
   border-radius: 5px;
   text-align: center;
 }
 
 /* btn more detail */
-.detailBtn{
+.detailBtn {
   text-align: right;
   padding: 0 24px 10px 24px;
 }
-.detaliIcon{
+
+.detaliIcon {
   text-align: right;
 }
 
@@ -48,24 +57,26 @@
   overflow: hidden;
 }
 
-.showDetailBtnConnect{
+.showDetailBtnConnect {
   background-color: white;
   color: green;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-.showDetailBtnDisConnect{
+
+.showDetailBtnDisConnect {
   background-color: white;
   color: orange;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 /* font style */
-.deviceName{
+.deviceName {
   text-align: center;
   font-size: 1.5rem;
   color: gray;
 }
-p.detailFont{
+
+p.detailFont {
   margin-bottom: 9px;
   color: gray;
   text-overflow: ellipsis;

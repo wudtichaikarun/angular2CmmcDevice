@@ -1,21 +1,26 @@
-.rowMain{
+.rowMain {
   margin: 20px;
 }
-.row{
+
+.row {
   margin: 0 5px 5px 5px;
 }
-.autoCP{
+
+.autoCP {
 }
-.fillDevice{
+
+.fillDevice {
   height: 67px;
   padding-top: 18px;
 }
-.headerNav{
+
+.headerNav {
   display: flex;
   float: right;
   margin-right: 20px;
 }
-div.homeHeader{
+
+div.homeHeader {
   margin-top: 0px;
   padding-top: 7px;
   text-align: center;
@@ -24,26 +29,27 @@ div.homeHeader{
 }
 
 /* filter selection */
-.mat-primary{
+.mat-primary {
   border-radius: 2px;
   margin: 0 10px 0 30px;
 }
 
 /* search input box */
-#md-input-1{
+#md-input-1 {
   margin: auto;
   border: 0;
   height: 20px;
 }
 
-.configIcon{
+.configIcon {
   margin: auto 15px;
 }
 
-.material-icons{
+.material-icons {
   color: gray;
 }
-.material-icons:hover{
+
+.material-icons:hover {
   color: #009F90;
   cursor: pointer;
 }

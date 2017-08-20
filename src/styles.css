@@ -1,9 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
 
-.card {
-  /*min-width: 200px;*/
-}
-
 .mat-card-header, .card-title {
   padding: 8px 10px;
   background: #eee;
