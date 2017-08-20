@@ -113,7 +113,7 @@ export class HomeComponent implements OnInit {
   filterStates(deviceName: string) {
     return deviceName? this.arrayDeviceName.filter((dName) => {
       if(dName !== undefined)
-      return dName.toString().toLowerCase().indexOf(deviceName.toLowerCase()) === 0
+      return `${dName}`.toLowerCase().indexOf(deviceName.toLowerCase()) === 0
     })
     : this.arrayDeviceName;
   }
