@@ -26,7 +26,6 @@ export class HomeComponent implements OnInit {
 
   devices:object[] ;
   devicesUnique: object = {};
-  sharchValue: string = 'hello'
 
   // Mqtt variable
   topic: string = 'CMMC/plug001';
@@ -46,11 +45,11 @@ export class HomeComponent implements OnInit {
 
   // variable for sharch and filter
   devicesStatus: object[] = [
-    {value: 'all', viewValue: 'SHOW ALL'},
-    {value: 'online', viewValue: 'ON LINE'},
-    {value: 'ofline', viewValue: 'OFF LINE'}
+    {value: AppConstants.FILTER_ALL, viewValue: 'SHOW ALL'},
+    {value: AppConstants.FILTER_ONLINE, viewValue: 'ON LINE'},
+    {value: AppConstants.FILTER_OFFLINE, viewValue: 'OFF LINE'}
   ];
-  selectValue: string = 'all';
+  selectValue: string = AppConstants.FILTER_ALL;
   arrayDeviceName: string[];
   stateCtrl: FormControl;
   filteredStates: any;
@@ -59,58 +58,48 @@ export class HomeComponent implements OnInit {
     private mqtt: MqttService,
     private cdRef: ChangeDetectorRef) {
 
-      // Sharch and autocompleat
-      this.stateCtrl = new FormControl();
-      this.filteredStates = this.stateCtrl.valueChanges
-        .startWith(null)
-        .map(deviceName => this.filterStates(deviceName));
+    // Sharch and autocompleat
+    this.stateCtrl = new FormControl();
+    this.filteredStates = this.stateCtrl.valueChanges
+      .startWith(null)
+      .map(deviceName => this.filterStates(deviceName));
 
-      // Mqtt event
-      mqtt.onConnect.subscribe((e) => console.log('onConnect', e));
-      mqtt.onError.subscribe((e) => console.log('onError', e));
-      mqtt.onClose.subscribe(() => console.log('onClose'));
-      mqtt.onReconnect.subscribe(() => console.log('onReconnect'));
-      mqtt.onMessage.subscribe((e) => {
-        const retained = e.retain;
-        const payload = e.payload.toString();
-        // console.log(e)
-        // console.log(`retained = ${retained}`);
-        const doAsync = () => {
-          return new Promise ((resolve, reject) => {
-            if (e.topic.indexOf('/status') > 0) {
+    // Mqtt event
+    mqtt.onConnect.subscribe((e) => console.log('onConnect', e));
+    mqtt.onError.subscribe((e) => console.log('onError', e));
+    mqtt.onClose.subscribe(() => console.log('onClose'));
+    mqtt.onReconnect.subscribe(() => console.log('onReconnect'));
+    mqtt.onMessage.subscribe((e) => {
+      const retained = e.retain;
+      const payload = e.payload.toString();
+      // console.log(`retained = ${retained}`);
+      const doAsync = () => {
+        return new Promise ((resolve, reject) => {
+          if (e.topic.indexOf('/status') > 0) {
+            try {
               const object = JSON.parse(payload);
               // assume that retained devices are died
               if (retained) {
                 object.info.client_id = undefined;
               }
               this.devicesUnique[object.d.myName] = object;
-              this.devices = Object.keys(this.devicesUnique).map((v, k) => {
-                // console.log(`v: ${v} ||  k: ${k}`);
-                return this.devicesUnique[v];
-              })
-              // console.log(this.devices);
-              resolve(this.devices);
+              this.devices = Object.keys(this.devicesUnique).map((v, k) => this.devicesUnique[v]);
+            } catch (exception) {
+              console.error(exception);
             }
-          })
-        }
-
-        doAsync().then((devices) =>{
-          this.getDeviceName(devices);
+            resolve(this.devices)
+          }
         })
-      });
+      }
+
+      doAsync().then((devices) =>{
+        this.getDeviceName(devices);
+      })
+
+    });
   }
 
-  // public unsafePublish(topic: string, message: string): void {
-  //   this.mqtt.unsafePublish(topic, message, {qos: 1, retain: true});
-  // }
-
-  // public publish(topic: string, message: string, retain = false, qos: QoS = 0): void {
-  //   this.mqtt
-  //     .publish(topic, message, { retain, qos })
-  //     .subscribe((err) => console.log(err));
-  // }
-
-  // Subscribe call by btn
+  // subscribe call by btn
   subscribe(filter: string): void {
     this.mqtt.observe(filter);
   }
@@ -130,16 +119,14 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    //this.getDeviceName(this.devices);
     this.subscribe(this.filter);
     //console.log(`myOtherMessage: ${this.myOtherMessage$}`)
   }
 
   // Create array devices.d.myName
   getDeviceName(devices) {
-    const deviceName: string[] = devices.map((device) => {
-      return device.d.myName;
-    });
-    this.arrayDeviceName = deviceName;
+    this.arrayDeviceName = devices.map((device) => device.d.myName);
   }
 
   // Filter device all | online | ofline

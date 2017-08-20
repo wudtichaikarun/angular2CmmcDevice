@@ -1,32 +1,26 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { AppConstants } from './AppConstants';
 
 @Pipe({
-    name: 'filterStatus'
+  name: 'filterStatus'
 })
 export class DevicesFilter implements PipeTransform {
 
-  transform (items: any[], filter: Object): object[] {
-    // Filter SHOW ALL
-    if (filter === 'all') {
+  transform(items: any[], filter: Object): object[] {
+    if (filter === AppConstants.FILTER_ALL) {
       return items;
-    }
-    // Filter ON LINE
-    else if(filter === 'online'){
+    } else if (filter === AppConstants.FILTER_ONLINE) {
       return items.filter((item) => {
         return item.info.client_id !== undefined;
-      })
-    }
-    // Filter OFF LINE
-    else if (filter === 'ofline') {
+      });
+    } else if (filter === AppConstants.FILTER_OFFLINE) {
       return items.filter((item) => {
         return item.info.client_id === undefined;
-      })
-    }
-    // Sahrch by device name
-    else {
+      });
+    } else /* filter by device name */{
       return items.filter((item) => {
         return item.d.myName === filter;
-      })
+      });
     }
   }
 

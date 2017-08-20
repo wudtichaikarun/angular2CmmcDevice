@@ -13,13 +13,12 @@ export class ConfigDataComponent implements OnInit {
   clientCHK: boolean = false;
   userPassword: boolean = false;
 
-  host: string = 'q.cmmc.io'
+  host: string = 'q.cmmc.io';
   port: number = 9001;
   prefix: string = 'CMMC'
-  username?: string;
-  password?: string;
-  clientId?: string;
-
+  username: string;
+  password: string;
+  clientId: string = 'devicesWs-' + (Math.random() * 1000).toFixed(2);
 
   constructor(private router: Router) { }
 
@@ -27,7 +26,7 @@ export class ConfigDataComponent implements OnInit {
     this.onSubmit ()
   }
 
-  btnCancleClick(){
+  btnCancleClick() {
     this.CancleClick.emit();
   }
 
@@ -40,8 +39,13 @@ export class ConfigDataComponent implements OnInit {
       password: this.password,
       clientId: this.clientId
     }
-
-    this.saveClick.emit(config);
+    //this.saveClick.emit(config);
+    console.log(`port = ${ this.port }
+                prefix = ${ this.prefix }
+                username= ${ this.username }
+                password = ${ this.password }
+                clientId = ${ this.clientId }
+                `);
   }
 
 }
