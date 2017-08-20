@@ -1,15 +1,15 @@
 <md-sidenav-container>
   <md-sidenav #sidenav >
-    <app-config-data (CancleClick)="sidenav.close()"></app-config-data>
+    <app-config-data (CancleClick)="sidenav.close()" (saveClick)="setConfig($event)" ></app-config-data>
   </md-sidenav>
 
   <!-- Nav Component -->
   <app-nav (clickOpenNav)="sidenav.open()"></app-nav>
 
-  <!-- Home Component -->
-  <app-home></app-home>
+  <!-- router select Component -->
+  <router-outlet></router-outlet>
 
   <!-- Footer Component -->
-  <app-footer></app-footer>
+  <!-- <app-footer></app-footer> -->
 
 </md-sidenav-container>

@@ -7,15 +7,21 @@ import { MqttServiceOptions,MqttService } from 'ngx-mqtt';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  hostname:string = 'q.cmmc.io';
+  port:number = 59001;
+  path:string = '/mqtt';
+
+  setConfig (config) {
+    console.log(config)
+    this.hostname = config.host;
+    this.port = config.port;
+  }
 
   MQTT_SERVICE_OPTIONS: MqttServiceOptions = {
-    hostname: 'q.cmmc.io',
-    port: 59001,
-    path: '/mqtt'
+    hostname: this.hostname,
+    port: this.port,
+    path: this.path,
   };
 
-  // mqttServiceFactory() {
-  //   return new MqttService(this.MQTT_SERVICE_OPTIONS);
-  // }
 
 }

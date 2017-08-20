@@ -6,6 +6,7 @@
 }
 .homeHeader{
   margin-top: 0px;
+  padding-top: 7px;
   text-align: center;
   height: 60px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
@@ -24,4 +25,9 @@
   height: 20px;
 }
 
-
+.mat-icon.material-icons{
+  width: 27px;
+  height: 27px;
+  text-align: left;
+  color: gray;
+}

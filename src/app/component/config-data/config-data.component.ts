@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 })
 export class ConfigDataComponent implements OnInit {
   @Output() CancleClick: EventEmitter<any> = new EventEmitter()
+  @Output() saveClick: EventEmitter<any> = new EventEmitter()
 
   clientCHK: boolean = false;
   userPassword: boolean = false;
@@ -15,29 +16,32 @@ export class ConfigDataComponent implements OnInit {
   host: string = 'q.cmmc.io'
   port: number = 9001;
   prefix: string = 'CMMC'
-  username: string;
-  password: string;
-  clientId: string = 'id1234';
+  username?: string;
+  password?: string;
+  clientId?: string;
 
 
   constructor(private router: Router) { }
 
   ngOnInit() {
+    this.onSubmit ()
   }
 
   btnCancleClick(){
-    this.CancleClick.emit();
+    // this.CancleClick.emit();
   }
 
   onSubmit () {
-    console.log(`
-                port = ${ this.port }
-                prefix = ${ this.prefix }
-                username= ${ this.username }
-                password = ${ this.password }
-                clientId = ${ this.clientId }
-                `)
+    const config: object = {
+      host: this.host,
+      port: this.port,
+      prefix: this.prefix,
+      username: this.username,
+      password: this.password,
+      clientId: this.clientId
+    }
 
+    this.saveClick.emit(config);
   }
 
 }

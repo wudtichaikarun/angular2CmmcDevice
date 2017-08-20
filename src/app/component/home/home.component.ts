@@ -119,8 +119,11 @@ export class HomeComponent implements OnInit {
 
   // FilterStates call by btn key prefix vaule ex. 'MARU/#'
   filterStates(deviceName: string) {
-    return deviceName ? this.arrayDeviceName.filter(dName => dName.toString().toLowerCase().indexOf(deviceName.toLowerCase()) === 0)
-      : this.arrayDeviceName;
+    return deviceName? this.arrayDeviceName.filter((dName) => {
+      if(dName !== undefined)
+      return dName.toString().toLowerCase().indexOf(deviceName.toLowerCase()) === 0
+    })
+    : this.arrayDeviceName;
   }
 
   ngOnInit() {

@@ -24,6 +24,8 @@ import { FooterComponent } from './component/footer/footer.component';
 import { ConfigDataComponent } from './component/config-data/config-data.component';
 import { CardComponent } from './component/card/card.component';
 import { MoreDetailComponent } from './component/more-detail/more-detail.component';
+import { HelpComponent } from './component/help/help.component';
+import { AboutUsComponent } from './component/about-us/about-us.component';
 
 // Pipe filter
 import { DevicesFilter } from './shared/devices-filter';
@@ -37,11 +39,6 @@ import {
   OnMessageEvent
 } from 'ngx-mqtt';
 
-// export const MQTT_SERVICE_OPTIONS: MqttServiceOptions = {
-//   hostname: 'q.cmmc.io',
-//   port: 59001,
-//   path: '/mqtt'
-// };
 
 const servicMqtt = new AppComponent();
 const mqttServiceOption = servicMqtt.MQTT_SERVICE_OPTIONS
@@ -51,14 +48,19 @@ export function mqttServiceFactory() {
 }
 
 const routes: Routes = [
-// {
-//     path: '', redirectTo:'config',
-//     pathMatch: 'full'
-// },
-// {
-//   path: 'home',
-//   component: HomeComponent
-// }
+{
+    path: '', redirectTo:'home',
+    pathMatch: 'full'
+},{
+  path: 'home',
+  component: HomeComponent
+},{
+  path: 'help',
+  component: HelpComponent
+},{
+  path: 'about',
+  component: AboutUsComponent
+}
 ];
 
 @NgModule({
@@ -73,7 +75,9 @@ const routes: Routes = [
     MoreDetailComponent,
     KeysPipe,
     StateToStringPipe,
-    StateToClassPipe
+    StateToClassPipe,
+    HelpComponent,
+    AboutUsComponent
   ],
   imports: [
     BrowserModule,
