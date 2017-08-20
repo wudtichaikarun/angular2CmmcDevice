@@ -1,35 +1,78 @@
-<div class="card homeHeader">
+<md-sidenav-container>
+  <md-sidenav #sidenav >
+    <app-config-data (CancleClick)="sidenav.close()"></app-config-data>
+  </md-sidenav>
 
-  <!-- search and autocomplete -->
-  <md-input-container>
-    <input type="text" mdInput placeholder="sharch by device name" [mdAutocomplete]="auto" [formControl]="stateCtrl" #searchValue>
-    <md-icon mdSuffix>
-      search
-    </md-icon>
-  </md-input-container>
+  <div class="card homeHeader">
 
-  <md-autocomplete #auto="mdAutocomplete" [displayWith]="displayFn">
-    <md-option *ngFor="let state of filteredStates | async" [value]="state" (click)="autoCompleteValueChange(state)" >
-      {{ state }}
-    </md-option>
-  </md-autocomplete>
+    <div class="headerNav">
+      <!-- search and autocomplete -->
+      <div class="autoCP">
+        <md-input-container>
+          <input
+            type="text"
+            mdInput
+            placeholder="sharch by device name"
+            [mdAutocomplete]="auto"
+            [formControl]="stateCtrl"
+            #searchValue>
 
-  <!-- filter deviecs -->
-  <md-select placeholder="filter device" >
-    <md-option *ngFor="let status of devicesStatus" [value]="status.value" (click)="onMySelectChange(status.value)">
-      {{ status.viewValue }}
-    </md-option>
-  </md-select>
+          <md-icon mdSuffix>
+            search
+          </md-icon>
+        </md-input-container>
 
-</div>
+        <md-autocomplete
+          #auto="mdAutocomplete"
+          [displayWith]="displayFn">
 
-<div class="row rowMain">
+          <md-option
+            *ngFor="let state of filteredStates | async"
+            [value]="state"
+            (click)="autoCompleteValueChange(state)" >
+            {{ state }}
+          </md-option>
+        </md-autocomplete>
+      </div>
 
-  <!-- Card Component -->
-  <app-card
-    class="col xl3 l4 m6 s12"
-    *ngFor="let device of devices | filterStatus: selectValue"
-    [content]="device">
-  </app-card>
+      <!-- filter deviecs -->
+      <div class="fillDevice">
+        <md-select placeholder="filter device" >
+          <md-option
+            *ngFor="let status of devicesStatus"
+            [value]="status.value"
+            (click)="onMySelectChange(status.value)">
+            {{ status.viewValue }}
+          </md-option>
+        </md-select>
+      </div>
 
-</div>
+      <div class="configIcon" (click)="refresh()">
+        <a>
+          <i class="material-icons">refresh</i>
+        </a>
+      </div>
+
+      <div class="configIcon" (click)="sidenav.open()">
+      <a>
+        <i class="material-icons">settings</i>
+      </a>
+    </div>
+    </div>
+
+  </div>
+
+
+  <div class="row rowMain">
+    <!-- Card Component -->
+    <app-card
+      class="col xl3 l4 m6 s12"
+      *ngFor="let device of devices | filterStatus: selectValue"
+      [content]="device">
+    </app-card>
+  </div>
+
+
+</md-sidenav-container>
+
+

@@ -4,7 +4,18 @@
 .row{
   margin: 0 5px 5px 5px;
 }
-.homeHeader{
+.autoCP{
+}
+.fillDevice{
+  height: 67px;
+  padding-top: 18px;
+}
+.headerNav{
+  display: flex;
+  float: right;
+  margin-right: 20px;
+}
+div.homeHeader{
   margin-top: 0px;
   padding-top: 7px;
   text-align: center;
@@ -25,9 +36,14 @@
   height: 20px;
 }
 
-.mat-icon.material-icons{
-  width: 27px;
-  height: 27px;
-  text-align: left;
+.configIcon{
+  margin: auto 15px;
+}
+
+.material-icons{
   color: gray;
+}
+.material-icons:hover{
+  color: #009F90;
+  cursor: pointer;
 }

@@ -28,7 +28,7 @@ export class ConfigDataComponent implements OnInit {
   }
 
   btnCancleClick(){
-    // this.CancleClick.emit();
+    this.CancleClick.emit();
   }
 
   onSubmit () {

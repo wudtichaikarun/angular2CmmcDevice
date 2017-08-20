@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild, Output, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
@@ -20,6 +20,9 @@ export type QoS = 0 | 1 | 2;
 
 export class HomeComponent implements OnInit {
   @ViewChild('searchValue') searchValue;
+  @Output ()  clickOpenNav: EventEmitter<any> = new EventEmitter();
+  // Pagination
+ // static PER_PAGE = 10;
 
   devices:object[] ;
   devicesUnique: object = {};
@@ -154,6 +157,32 @@ export class HomeComponent implements OnInit {
   // Sherch
   autoCompleteValueChange(dName: string) {
     this.selectValue = dName;
+  }
+
+  /*
+  // Pagingtion
+  getDevice(page = 1) {
+    const startIndex = (page - 1 ) * HomeComponent.PER_PAGE;
+    const devicesPage = this.devices
+      .slice(startIndex, startIndex + HomeComponent.PER_PAGE);
+    console.log(`
+                devicesPage:${devicesPage}
+                currentPage:${page}
+                totalPages:${Math.ceil(this.devices.length / HomeComponent.PER_PAGE)}
+                `)
+    return {
+      devicesPage,
+      currentPage: page,
+      totalPages: Math.ceil(this.devices.length / HomeComponent.PER_PAGE)
+    }
+  }*/
+
+  refresh () {
+    window.location.reload();
+  }
+
+  btnSettingsClick () {
+    this.clickOpenNav.emit();
   }
 
 }
