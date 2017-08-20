@@ -20,11 +20,11 @@ export type QoS = 0 | 1 | 2;
 
 export class HomeComponent implements OnInit {
   @ViewChild('searchValue') searchValue;
-  @Output ()  clickOpenNav: EventEmitter<any> = new EventEmitter();
+  @Output() clickOpenNav: EventEmitter<any> = new EventEmitter();
   // Pagination
- // static PER_PAGE = 10;
+  // static PER_PAGE = 10;
 
-  devices:object[] ;
+  devices: object[];
   devicesUnique: object = {};
 
   // Mqtt variable
@@ -33,6 +33,7 @@ export class HomeComponent implements OnInit {
   qos: QoS = 0;
   filter: string = 'MARU/#';
   message: string;
+
   // myOtherMessage$: Observable<MqttMessage>;
 
   get state() {
@@ -54,9 +55,8 @@ export class HomeComponent implements OnInit {
   stateCtrl: FormControl;
   filteredStates: any;
 
-  constructor(
-    private mqtt: MqttService,
-    private cdRef: ChangeDetectorRef) {
+  constructor(private mqtt: MqttService,
+              private cdRef: ChangeDetectorRef) {
 
     // Sharch and autocompleat
     this.stateCtrl = new FormControl();
@@ -74,7 +74,7 @@ export class HomeComponent implements OnInit {
       const payload = e.payload.toString();
       // console.log(`retained = ${retained}`);
       const doAsync = () => {
-        return new Promise ((resolve, reject) => {
+        return new Promise((resolve, reject) => {
           if (e.topic.indexOf('/status') > 0) {
             try {
               const object = JSON.parse(payload);
@@ -87,14 +87,14 @@ export class HomeComponent implements OnInit {
             } catch (exception) {
               console.error(exception);
             }
-            resolve(this.devices)
+            resolve(this.devices);
           }
-        })
-      }
+        });
+      };
 
-      doAsync().then((devices) =>{
+      doAsync().then((devices) => {
         this.getDeviceName(devices);
-      })
+      });
 
     });
   }
@@ -111,11 +111,11 @@ export class HomeComponent implements OnInit {
 
   // FilterStates call by btn key prefix vaule ex. 'MARU/#'
   filterStates(deviceName: string) {
-    return deviceName? this.arrayDeviceName.filter((dName) => {
-      if(dName !== undefined)
-      return dName.toString().toLowerCase().indexOf(deviceName.toLowerCase()) === 0
-    })
-    : this.arrayDeviceName;
+    return deviceName ? this.arrayDeviceName.filter((dName) => {
+        if (dName !== undefined)
+          return dName.toString().toLowerCase().indexOf(deviceName.toLowerCase()) === 0;
+      })
+      : this.arrayDeviceName;
   }
 
   ngOnInit() {
@@ -164,11 +164,11 @@ export class HomeComponent implements OnInit {
     }
   }*/
 
-  refresh () {
+  refresh() {
     window.location.reload();
   }
 
-  btnSettingsClick () {
+  btnSettingsClick() {
     this.clickOpenNav.emit();
   }
 
