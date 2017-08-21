@@ -15,7 +15,7 @@ export class ConfigDataComponent implements OnInit {
 
   host: string = 'q.cmmc.io';
   port: number = 9001;
-  prefix: string = 'CMMC'
+  prefix: string = 'MARU/#'
   username: string;
   password: string;
   clientId: string = 'devicesWs-' + (Math.random() * 1000).toFixed(2);
@@ -23,7 +23,7 @@ export class ConfigDataComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
-    this.onSubmit ()
+    // this.onSubmit ()
   }
 
   btnCancleClick() {
@@ -39,13 +39,13 @@ export class ConfigDataComponent implements OnInit {
       password: this.password,
       clientId: this.clientId
     }
-    //this.saveClick.emit(config);
-    console.log(`port = ${ this.port }
-                prefix = ${ this.prefix }
-                username= ${ this.username }
-                password = ${ this.password }
-                clientId = ${ this.clientId }
-                `);
+    this.saveClick.emit(config);
+    // console.log(`port = ${ this.port }
+    //             prefix = ${ this.prefix }
+    //             username= ${ this.username }
+    //             password = ${ this.password }
+    //             clientId = ${ this.clientId }
+    //             `);
   }
 
 }

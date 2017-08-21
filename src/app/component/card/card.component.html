@@ -1,39 +1,10 @@
 <div [ngClass]="(content.info.client_id) ? 'card connect' : 'card disconnect'">
-
-  <div class="card-content">
-
-    <div class="row">
-      <div class="col s9 deviceName">
-        <p class="deviceFont"> {{ content.d.myName }} </p>
-      </div>
-
-      <div class="col s3 detaliIcon">
-        <!-- btn show detail when status = ON LINE -->
-        <button
-          (click)="showDetail(content)"
-          md-icon-button
-          *ngIf="(content.info.client_id)"
-          class="btn tooltipped showDetailBtnConnect"
-          data-position="bottom"
-          data-delay="50"
-          data-tooltip="Show More Detail">
-          <md-icon>more</md-icon>
-        </button>
-
-        <!-- btn show detail when status = OFF LINE -->
-        <button
-          (click)="showDetail(content)"
-          md-icon-button
-          *ngIf="(!content.info.client_id)"
-          class="btn tooltipped showDetailBtnDisConnect"
-          data-position="bottom" data-delay="50"
-          data-tooltip="Connection Fail">
-          <md-icon>error</md-icon>
-        </button>
-      </div>
-    </div>
-
-    <div class="row">
+  <md-card class="example-card">
+    <md-card-header>
+      <md-card-title>{{ content.d.myName }}</md-card-title>
+    </md-card-header>
+    <!--<img md-card-image src="assets/img/examples/shiba2.jpg">-->
+    <md-card-content>
       <div class="col s4">
         <!-- ip key -->
         <p class="detailFont"><b>ip:</b></p>
@@ -55,9 +26,13 @@
         <!-- prefix value -->
         <p class="detailFont">{{ content.info.prefix }}{{ content.info.device_id || content.d.device_id }}/status</p>
       </div>
-    </div>
 
-  </div>
+    </md-card-content>
 
+    <md-card-actions align="right">
+      <button md-button (click)="showDetail(content)">MORE INFO</button>
+    </md-card-actions>
+
+  </md-card>
 </div>
 

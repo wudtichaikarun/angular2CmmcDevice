@@ -24,8 +24,9 @@ import { FooterComponent } from './component/footer/footer.component';
 import { ConfigDataComponent } from './component/config-data/config-data.component';
 import { CardComponent } from './component/card/card.component';
 import { MoreDetailComponent } from './component/more-detail/more-detail.component';
-import { HelpComponent } from './component/help/help.component';
-import { AboutUsComponent } from './component/about-us/about-us.component';
+
+// Try to use Service
+import { MqttServiceService } from './shared/mqtt-service.service';
 
 // Pipe filter
 import { DevicesFilter } from './shared/devices-filter';
@@ -36,31 +37,26 @@ import {
   MqttMessage,
   MqttModule,
   MqttService,
-  OnMessageEvent
+  OnMessageEvent,
+  MqttServiceOptions
 } from 'ngx-mqtt';
 
-
-const servicMqtt = new AppComponent();
-const mqttServiceOption = servicMqtt.MQTT_SERVICE_OPTIONS
+const servicMqtt = new MqttServiceService();
+const mqttServiceOption = servicMqtt.MQTT_SERVICE_OPTIONS;
 
 export function mqttServiceFactory() {
   return new MqttService(mqttServiceOption);
 }
 
+
 const routes: Routes = [
-{
-    path: '', redirectTo:'home',
-    pathMatch: 'full'
-},{
-  path: 'home',
-  component: HomeComponent
-},{
-  path: 'help',
-  component: HelpComponent
-},{
-  path: 'about',
-  component: AboutUsComponent
-}
+  // {
+  //   path: '', redirectTo: 'home',
+  //   pathMatch: 'full'
+  // }, {
+  //   path: 'home',
+  //   component: HomeComponent
+  // }
 ];
 
 @NgModule({
@@ -75,9 +71,7 @@ const routes: Routes = [
     MoreDetailComponent,
     KeysPipe,
     StateToStringPipe,
-    StateToClassPipe,
-    HelpComponent,
-    AboutUsComponent
+    StateToClassPipe
   ],
   imports: [
     BrowserModule,
@@ -101,7 +95,7 @@ const routes: Routes = [
   entryComponents: [
     MoreDetailComponent
   ],
-  providers: [],
+  providers: [MqttServiceService],
   bootstrap: [
     AppComponent
   ]

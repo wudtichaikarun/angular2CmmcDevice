@@ -1,6 +1,6 @@
 <md-sidenav-container>
-  <md-sidenav #sidenav >
-    <app-config-data (CancleClick)="sidenav.close()"></app-config-data>
+  <md-sidenav #sidenav>
+    <app-config-data (CancleClick)="sidenav.close()" (saveClick)="setConfig($event)"></app-config-data>
   </md-sidenav>
 
   <div class="card homeHeader">
@@ -12,7 +12,7 @@
           <input
             type="text"
             mdInput
-            placeholder="sharch by device name"
+            placeholder="Filter device name"
             [mdAutocomplete]="auto"
             [formControl]="stateCtrl"
             #searchValue>
@@ -29,7 +29,7 @@
           <md-option
             *ngFor="let state of filteredStates | async"
             [value]="state"
-            (click)="autoCompleteValueChange(state)" >
+            (click)="autoCompleteValueChange(state)">
             {{ state }}
           </md-option>
         </md-autocomplete>
@@ -37,7 +37,7 @@
 
       <!-- filter deviecs -->
       <div class="fillDevice">
-        <md-select placeholder="filter device" >
+        <md-select placeholder="STATUS">
           <md-option
             *ngFor="let status of devicesStatus"
             [value]="status.value"
@@ -54,16 +54,16 @@
       </div>
 
       <div class="configIcon" (click)="sidenav.open()">
-      <a>
-        <i class="material-icons">settings</i>
-      </a>
-    </div>
+        <a>
+          <i class="material-icons">settings</i>
+        </a>
+      </div>
     </div>
 
   </div>
 
 
-  <div class="row rowMain">
+  <div class="row rowMain" *ngIf="cardShow" >
     <!-- Card Component -->
     <app-card
       class="col xl3 l4 m6 s12"

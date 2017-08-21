@@ -1,11 +1,19 @@
-import { Component, OnInit, ChangeDetectorRef, ViewChild, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectorRef,
+  ViewChild,
+  Output,
+  EventEmitter
+} from '@angular/core';
+//import { MqttServiceService } from '../../shared/mqtt-service.service'
 import { FormControl } from '@angular/forms';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/take';
 
 // ngx-mqtt
-import { MqttService, MqttMessage } from 'ngx-mqtt';
+import { MqttServiceOptions, MqttService, MqttMessage } from 'ngx-mqtt';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import { AppConstants } from '../../shared/AppConstants';
@@ -20,21 +28,29 @@ export type QoS = 0 | 1 | 2;
 
 export class HomeComponent implements OnInit {
   @ViewChild('searchValue') searchValue;
-  @Output ()  clickOpenNav: EventEmitter<any> = new EventEmitter();
-  // Pagination
- // static PER_PAGE = 10;
-
-  devices:object[] ;
+  @Output() clickOpenNav: EventEmitter<any> = new EventEmitter();
+  devices: object[];
   devicesUnique: object = {};
+  cardShow: boolean = true;
+  // Pagination
+  // static PER_PAGE = 10;
 
-  // Mqtt variable
   topic: string = 'CMMC/plug001';
   retain: boolean = true;
   qos: QoS = 0;
-  filter: string = 'MARU/#';
+  prefix: string = 'MARU/#';
   message: string;
-  // myOtherMessage$: Observable<MqttMessage>;
 
+  setConfig (config) {
+    //this.subscribe(config.prefix);
+    //this.cardShow = false;
+    //this.devices = [{}]
+     console.log(config)
+    // this.hostname = config.host;
+    // this.port = config.port;
+  }
+
+  // myOtherMessage$: Observable<MqttMessage>;
   get state() {
     return this.mqtt.state;
   }
@@ -54,9 +70,7 @@ export class HomeComponent implements OnInit {
   stateCtrl: FormControl;
   filteredStates: any;
 
-  constructor(
-    private mqtt: MqttService,
-    private cdRef: ChangeDetectorRef) {
+  constructor(private mqtt: MqttService, private cdRf: ChangeDetectorRef) {
 
     // Sharch and autocompleat
     this.stateCtrl = new FormControl();
@@ -74,7 +88,7 @@ export class HomeComponent implements OnInit {
       const payload = e.payload.toString();
       // console.log(`retained = ${retained}`);
       const doAsync = () => {
-        return new Promise ((resolve, reject) => {
+        return new Promise((resolve, reject) => {
           if (e.topic.indexOf('/status') > 0) {
             try {
               const object = JSON.parse(payload);
@@ -87,42 +101,51 @@ export class HomeComponent implements OnInit {
             } catch (exception) {
               console.error(exception);
             }
-            resolve(this.devices)
+            resolve(this.devices);
           }
-        })
-      }
+        });
+      };
 
-      doAsync().then((devices) =>{
+      doAsync().then((devices) => {
         this.getDeviceName(devices);
-      })
+      });
 
     });
   }
 
-  // subscribe call by btn
-  subscribe(filter: string): void {
-    this.mqtt.observe(filter);
+  // Step 2 Subscribe call by ngOnInit
+  subscribe(prefix: string): void {
+    this.mqtt.observe(prefix);
   }
 
   // Unsubscribe call by btn
-  unsubscribe(filter: string): void {
-    this.mqtt.observables[filter] = null;
+  unsubscribe(prefix: string): void {
+    this.mqtt.observables[prefix] = null;
   }
 
   // FilterStates call by btn key prefix vaule ex. 'MARU/#'
   filterStates(deviceName: string) {
-    return deviceName? this.arrayDeviceName.filter((dName) => {
-      if(dName !== undefined)
-      return `${dName}`.toLowerCase().indexOf(deviceName.toLowerCase()) === 0
-    })
-    : this.arrayDeviceName;
+    return deviceName ? this.arrayDeviceName.filter((dName) => {
+        if (dName !== undefined)
+          return dName.toString().toLowerCase().indexOf(deviceName.toLowerCase()) === 0;
+      })
+      : this.arrayDeviceName;
   }
 
+  // Step 1
   ngOnInit() {
-    //this.getDeviceName(this.devices);
-    this.subscribe(this.filter);
-    //console.log(`myOtherMessage: ${this.myOtherMessage$}`)
+    //this.connect(this.prefix)
+    this.subscribe(this.prefix);
   }
+
+  // connect(prefix){
+  //   this._mqttService.connectMqtt(prefix).subscribe((data) => {
+  //     console.log(data)
+  //     if (data !== undefined) {
+  //       this.devices = data;
+  //     }
+  //   })
+  // }
 
   // Create array devices.d.myName
   getDeviceName(devices) {
@@ -164,11 +187,11 @@ export class HomeComponent implements OnInit {
     }
   }*/
 
-  refresh () {
+  refresh() {
     window.location.reload();
   }
 
-  btnSettingsClick () {
+  btnSettingsClick() {
     this.clickOpenNav.emit();
   }
 
