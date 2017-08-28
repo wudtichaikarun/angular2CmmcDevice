@@ -1,0 +1,20 @@
+/*
+{
+  "host": "q.cmmc.io",
+  "port": 59001,
+  "path": "mqtt",
+  "ssl": false,
+
+  "user": "guest",
+  "pass": "guest",
+
+  "subscribe": [
+      "MARU/#"
+  ],
+  "publish": [
+      "Test"
+  ],
+
+  "keepalive": 10
+}
+*/
